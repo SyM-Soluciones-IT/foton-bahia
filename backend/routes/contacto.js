@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const nodemailer = require('nodemailer');
 
-router.route('/api/contacto').post((req, res) => {
+router.route('/').post((req, res) => {
     const { name, email, message } = req.body;
 
     const transporter = nodemailer.createTransport({

@@ -18,11 +18,11 @@ connection.once('open', () => {
 });
 
 // Rutas para acceder a los datos y manejar el formulario de contacto
-const trucksRouter = require('./routes/productos');
+const productosRouter = require('./routes/productos'); // Cambia el nombre del router aquí
 const partsRouter = require('./routes/repuestos');
 const contactRouter = require('./routes/contacto');
 
-app.use('/api/productos', trucksRouter);
+app.use('/api/productos', productosRouter); // Cambia la ruta aquí
 app.use('/api/repuestos', partsRouter);
 app.use('/api/contacto', contactRouter);
 
