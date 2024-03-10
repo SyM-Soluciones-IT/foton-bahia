@@ -1,30 +1,25 @@
 import React from 'react';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+function CustomNavBar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container">
-        <Link className="navbar-brand" to="/">Inicio</Link>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/productos">Productos</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/repuestos">Repuestos</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/contacto">Contacto</Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <Navbar variant='dark' expand="lg" style={{ backgroundColor: 'gray', color: 'white', position: 'sticky', top: 120, zIndex: 100, padding: '10px' }}>
+      <Container>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="ml-auto" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+            <Nav.Link as={Link} to="/" style={{ textDecoration: 'none' }}>
+              Inicio
+            </Nav.Link>
+            <Nav.Link as={Link} to="/productos">Productos</Nav.Link>
+            <Nav.Link as={Link} to="/repuestos">Repuestos</Nav.Link>
+            <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
-};
+}
 
-export default Navbar;
+export default CustomNavBar;
