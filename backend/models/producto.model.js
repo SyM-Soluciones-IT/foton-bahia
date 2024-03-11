@@ -3,11 +3,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productoSchema = new Schema({
-    title: { type: String, required: true },
-    image: { type: String, required: true },
-    description: { type: String, required: true },
-    specs: { type: String, required: true }
+    name: { type: String, required: true },
+    description: { type: String },
+    image: { type: String },
+    category: { type: String },
+    specs: { type: String }
 });
+
 
 const Producto = mongoose.model('Producto', productoSchema);
 

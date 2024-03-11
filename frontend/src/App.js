@@ -5,6 +5,7 @@ import Header from './components/Header';
 import CustomNavBar from './components/Navbar';
 import ProductosList from './components/Productos';
 import ContactForm from './components/Contacto';
+import CategoriaList from './components/Categorias';
 
 const App = () => {
   return (
@@ -13,10 +14,10 @@ const App = () => {
         <Header />
         <CustomNavBar />
         <Routes>
-          <Route path="/" element={<ProductosList />} />
-          <Route path="/productos" element={<ProductosList />} />
-          <Route path="/productos/:categoria" element={<ProductosList />} />
-          <Route path="/contacto" element={<ContactForm />} />
+          <Route exact path="/" element={<CategoriaList />} />
+          <Route exact path="/productos" element={<CategoriaList />} />
+          <Route exact path="/productos/:categoria" element={<ProductosList />} />
+          <Route exact path="/contacto" element={<ContactForm />} />
         </Routes>
       </div>
     </Router>

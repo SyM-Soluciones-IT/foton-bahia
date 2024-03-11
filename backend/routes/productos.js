@@ -1,53 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 
 // Importa el modelo de categoría
 const Categoria = require('../models/categoria.model');
+const Producto = require('../models/producto.model');
 
 router.get('/', async (req, res) => {
     try {
-        // Obtener todas las colecciones excepto 'repuestos'
-        const collections = await mongoose.connection.db.listCollections().toArray();
-        const categoriasInfo = [];
-
-        for (const collection of collections) {
-            if (collection.name !== 'repuestos') {
-                console.log(collection.name)
-                // Buscar en los documentos de Categoria basado en el nombre de la colección
-                const categoriaEncontrada = await Categoria.findOne({ name: collection.name });
-                console.log(categoriaEncontrada.categoryImg)
-                if (categoriaEncontrada) {
-                    categoriasInfo.push({ 
-                        name: categoriaEncontrada.title, 
-                        categoryImg: categoriaEncontrada.categoryImg 
-                    });
-                }
-            }
-        }
-        res.json(categoriasInfo);
+      const categorias = await Categoria.find();
+      res.json(categorias);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error.message });
     }
-});
+  });
 
+// Ruta para obtener productos por categoría
 router.get('/:categoria', async (req, res) => {
-    const { categoria } = req.params;
-
+    const categoria = req.params.categoria;
     try {
-        // Busca la colección con el nombre de la categoría
-        const categoriaEncontrada = await Categoria.findOne({ title: categoria });
-
-        // Verifica si se encontró la categoría
-        if (!categoriaEncontrada) {
-            return res.status(404).json({ message: `No se encontró la categoría "${categoria}"` });
-        }
-
-        // Devuelve los productos encontrados en la categoría
-        res.json(categoriaEncontrada.products);
+      const productos = await Producto.find({ category: categoria });
+      res.json(productos);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error.message });
     }
-});
+  });
 
 module.exports = router;
