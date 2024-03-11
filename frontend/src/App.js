@@ -1,11 +1,14 @@
+// En el componente App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import CustomNavBar from './components/Navbar';
-import ProductosList from './components/Productos';
-import ContactForm from './components/Contacto';
-import CategoriaList from './components/Categorias';
+import Home from './components/Home';
+import Categorias from './components/Categorias';
+import Productos from './components/Productos';
+import Repuestos from './components/Repuestos';
+import Contacto from './components/Contacto';
 
 const App = () => {
   return (
@@ -14,10 +17,11 @@ const App = () => {
         <Header />
         <CustomNavBar />
         <Routes>
-          <Route exact path="/" element={<CategoriaList />} />
-          <Route exact path="/productos" element={<CategoriaList />} />
-          <Route exact path="/productos/:categoria" element={<ProductosList />} />
-          <Route exact path="/contacto" element={<ContactForm />} />
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/productos" element={<Categorias />} />
+          <Route exact path="/productos/:categoria" element={<Productos />} />
+          <Route exact path="/repuestos" element={<Repuestos />} />
+          <Route exact path="/contacto" element={<Contacto />} />
         </Routes>
       </div>
     </Router>
