@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Slider from 'react-infinite-logo-slider';
 import axios from 'axios';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Card, CardImg, CardBody } from 'react-bootstrap'; // Importa componentes de tarjeta de Reactstrap o la librería que estés utilizando
+import './Marcas.css';
 
 const ClientesList = () => {
   const [clientes, setClientes] = useState([]);
@@ -11,7 +13,7 @@ const ClientesList = () => {
 
   const obtenerClientes = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/clientes'); // Cambia la URL según tu configuración
+      const response = await axios.get('http://localhost:5000/api/clientes');
       setClientes(response.data);
     } catch (error) {
       console.error('Error fetching clientes:', error);
@@ -19,16 +21,29 @@ const ClientesList = () => {
   };
 
   return (
-    <Container>
+    <div className='container'>
       <h2>Clientes</h2>
-      <Row>
+      <Slider
+        autoWidth={true}
+        maxWidth={1000}
+        duration={20}
+        pauseOnHover={true}
+        blurBorders={false}
+        blurBoderColor={'#fff'}
+        className="centered-slider"
+        infinite={true}
+      >
         {clientes.map(cliente => (
-          <Col key={cliente._id} xs={6} md={4} lg={3}>
-            <Image src={cliente.image} alt={cliente.name} fluid />
-          </Col>
+          <Slider.Slide key={cliente._id} className="centered-slide">
+            <Card className="image-card">
+              <CardBody className="image-card-body">
+                <CardImg src={cliente.image} alt={cliente.name} className="card-img" />
+              </CardBody>
+            </Card>
+          </Slider.Slide>
         ))}
-      </Row>
-    </Container>
+      </Slider>
+    </div>
   );
 };
 

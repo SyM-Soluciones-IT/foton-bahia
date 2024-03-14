@@ -12,7 +12,7 @@ const Home = () => {
       <section id="productos">
         <CategoriaList />
       </section>
-      <section id="marcas"> {/* Agrega una sección para mostrar las marcas */}
+      <section  id="marcas"> {/* Agrega una sección para mostrar las marcas */}
         <MarcaList /> {/* Agrega el componente MarcaList */}
       </section>
       <section id="repuestos">
