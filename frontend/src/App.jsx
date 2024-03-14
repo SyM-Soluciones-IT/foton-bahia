@@ -2,6 +2,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import Header from './components/Header';
 import CustomNavBar from './components/Navbar';
 import Home from './components/Home';
@@ -9,6 +11,7 @@ import Categorias from './components/Categorias';
 import Productos from './components/Productos';
 import Repuestos from './components/Repuestos';
 import Contacto from './components/Contacto';
+// import './App.css';
 
 const App = () => {
   return (

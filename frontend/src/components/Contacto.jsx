@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
-
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -36,7 +35,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div>
+    <Container>
       <h2>Contact Us</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formName">
@@ -57,7 +56,7 @@ const ContactForm = () => {
         </Form.Group>
         <Button variant="primary" type="submit">Send</Button>
       </Form>
-    </div>
+    </Container>
   );
 };
 

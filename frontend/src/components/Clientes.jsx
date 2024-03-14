@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Container, Row, Col, Image } from 'react-bootstrap';
 
 const ClientesList = () => {
   const [clientes, setClientes] = useState([]);
@@ -18,14 +19,16 @@ const ClientesList = () => {
   };
 
   return (
-    <div>
+    <Container>
       <h2>Clientes</h2>
-      <ul>
+      <Row>
         {clientes.map(cliente => (
-          <img key={cliente._id} src={cliente.image} alt={cliente.name} />
+          <Col key={cliente._id} xs={6} md={4} lg={3}>
+            <Image src={cliente.image} alt={cliente.name} fluid />
+          </Col>
         ))}
-      </ul>
-    </div>
+      </Row>
+    </Container>
   );
 };
 

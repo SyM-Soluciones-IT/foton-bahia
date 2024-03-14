@@ -25,7 +25,7 @@ const CategoriaList = () => {
 
   return (
     <Container>
-      <h2 className="mt-4 mb-3">Categorías</h2>
+      <h2 className="mt-4 mb-3">Productos</h2>
       <div className="row">
         {categorias.map(categoria => (
           <div key={categoria._id} className="col-md-4 mb-4">
