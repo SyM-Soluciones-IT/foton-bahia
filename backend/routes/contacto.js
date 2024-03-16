@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
       from: `${email}`,
       to: process.env.EMAIL,
       subject: `${asunto}`,
-      text: `De ${name}: ${message}`
+      text: `De ${name} \nEmail: ${email} \n\n ${message}`
     };
 
     // Enviar el correo
