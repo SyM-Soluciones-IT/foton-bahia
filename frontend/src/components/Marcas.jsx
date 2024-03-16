@@ -23,7 +23,6 @@ const MarcaList = () => {
 
   return (
     <div className='container'>
-      <h2>Marcas</h2>
       <Slider
         autoWidth={true}
         maxWidth={1000}

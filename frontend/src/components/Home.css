@@ -1,0 +1,19 @@
+.principal{
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em;
+}
+.principal-titulo{
+  text-align: center;
+  font-family: 'Poppins', sans-serif;;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+  
+
+.principal-texto{
+  text-align: center;
+  font-family: 'Poppins', sans-serif;;
+  font-size: 1em;
+  font-weight: 500;
+}

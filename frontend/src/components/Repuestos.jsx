@@ -19,8 +19,7 @@ const RepuestosList = () => {
   };
 
   return (
-    <Container>
-      <h2 className="mt-4 mb-3">Repuestos</h2>
+    <Container style={{ marginTop: '150px' }}>
       <ListGroup>
         {repuestos.map((repuesto) => (
           <ListGroup.Item key={repuesto._id}>

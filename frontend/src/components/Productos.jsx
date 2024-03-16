@@ -1,8 +1,8 @@
 // En ProductosList.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Card, Button, Modal, Container, Row, Col } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
+import './Productos.css';
 
 const ProductosList = () => {
   const [productos, setProductos] = useState([]);
@@ -40,76 +40,82 @@ const ProductosList = () => {
   };
 
   return (
-    <Container>
-      <h2 className="mt-4 mb-3">Productos List</h2>
-      <Row>
+    <div className="container contenedor">
+      <div className="row">
         {productos.map((producto) => (
-          <Col key={producto._id} md={4} className="mb-4">
-            <Card className="primary" border="primary" align="center">
-              <Card.Img variant="top" src={producto.image} />
-              <Card.Body>
-                <Card.Title>{producto.name}</Card.Title>
-                <Card.Text>{producto.description}</Card.Text>
-                <Card.Text>
+          <div key={producto._id} className="col-md-4 mb-4">
+            <div className="card text-center primary border-primary">
+              <img className="card-img-top" src={producto.image} alt={producto.name} />
+              <div className="card-body">
+                <h5 className="card-title">{producto.name}</h5>
+                <p className="card-text">{producto.description}</p>
+                <p className="card-text">
                   <strong>Category:</strong>{" "}
                   {categoria || "No especificada"}
-                </Card.Text>
-                <Card.Text>
+                </p>
+                <p className="card-text">
                   <strong>Specs:</strong> {producto.specs}
-                </Card.Text>
-                <Button
-                  variant="primary"
+                </p>
+                <button
+                  className="btn btn-primary"
                   onClick={() => handleCotizarClick(producto)}
                 >
                   Cotiza aquí
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
+                </button>
+              </div>
+            </div>
+          </div>
         ))}
-      </Row>
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Cotizar Producto</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {productoSeleccionado && (
-            <p>
-              Elija una opción para cotizar el producto{" "}
-              {productoSeleccionado.name}:
-            </p>
-          )}
-          <Button
-            variant="primary"
-            onClick={() => {
-              const mensaje = encodeURIComponent(
-                `Hola, quiero cotizar el producto ${productoSeleccionado.name}`
-              );
-              window.open(`https://wa.me/+5492916446200/?text=${mensaje}`);
-            }}
-          >
-            Cotizar por WhatsApp
-          </Button>{" "}
-          <Button
-            variant="primary"
-            onClick={() => {
-              navigate(
-                `/contacto?asunto=Cotizacion ${encodeURIComponent(
-                  productoSeleccionado.name
-                )}`
-              );
-            }}
-          >
-            Cotizar en la página
-          </Button>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Cerrar
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </Container>
+      </div>
+      {showModal && (
+        <div className="modal show" tabIndex="-1" role="dialog">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Cotizar Producto</h5>
+                <button type="button" className="close" onClick={() => setShowModal(false)} aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                {productoSeleccionado && (
+                  <p>
+                    Elija una opción para cotizar el producto{" "}
+                    {productoSeleccionado.name}:
+                  </p>
+                )}
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    const mensaje = encodeURIComponent(
+                      `Hola, quiero cotizar el producto ${productoSeleccionado.name}`
+                    );
+                    window.open(`https://wa.me/+5492916446200/?text=${mensaje}`);
+                  }}
+                >
+                  Cotizar por WhatsApp
+                </button>{" "}
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    navigate(
+                      `/contacto?asunto=Cotizacion ${encodeURIComponent(
+                        productoSeleccionado.name
+                      )}`
+                    );
+                  }}
+                >
+                  Cotizar en la página
+                </button>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

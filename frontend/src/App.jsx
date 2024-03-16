@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Header from './components/Header';
-import CustomNavBar from './components/Navbar';
+// import CustomNavBar from './components/Navbar';
 import Home from './components/Home';
 import Categorias from './components/Categorias';
 import Productos from './components/Productos';
@@ -16,9 +16,8 @@ import Contacto from './components/Contacto';
 const App = () => {
   return (
     <Router>
-      <div>
         <Header />
-        <CustomNavBar />
+        {/* <CustomNavBar /> */}
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/productos" element={<Categorias />} />
@@ -26,7 +25,6 @@ const App = () => {
           <Route exact path="/repuestos" element={<Repuestos />} />
           <Route exact path="/contacto" element={<Contacto />} />
         </Routes>
-      </div>
     </Router>
   );
 };

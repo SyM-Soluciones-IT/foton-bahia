@@ -35,8 +35,7 @@ const ContactForm = () => {
   };
 
   return (
-    <Container>
-      <h2>Contact Us</h2>
+    <Container style={{ marginTop: '150px' }}>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formName">
           <Form.Label>Name</Form.Label>

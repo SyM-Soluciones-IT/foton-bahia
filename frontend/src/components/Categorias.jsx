@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, Button, Container } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import './Categorias.css'; // Importa tus estilos CSS aquí
 
 const CategoriaList = () => {
   const [categorias, setCategorias] = useState([]);
@@ -25,24 +26,25 @@ const CategoriaList = () => {
 
   return (
     <Container>
-      <h2 className="mt-4 mb-3">Productos</h2>
       <div className="row">
         {categorias.map(categoria => (
-          <div key={categoria._id} className="col-md-4 mb-4">
-            <Card className="primary" border="primary">
-              <Card.Img variant="top" src={categoria.image} />
-              <Card.Body>
-                <Card.Title>{categoria.name}</Card.Title>
-                <Link to={`/productos/${categoria.name}`}>
-                  <Button variant="primary">Ver Productos</Button>
+          <div key={categoria._id} className="col-lg-4 col-md-6 col-sm-12 mb-4 d-flex align-content-center border-0 flex-column flex-wrap">
+              <div className='div-category' style={{ width: 'fit-content'}}>
+                <Link to={`/productos/${categoria.name}`} className="category-link">
+                  <img src={categoria.image} alt={categoria.name} className="category-image" />
                 </Link>
-              </Card.Body>
-            </Card>
+              </div>
+              <div className='div-category' style={{ alignSelf: 'center', width: 'fit-content'}}>
+                <Link to={`/productos/${categoria.name}`} className="category-link">
+                  <span className="category-title">{categoria.name}</span>
+                </Link>
+              </div>
           </div>
         ))}
       </div>
     </Container>
   );
+
 };
 
 export default CategoriaList;

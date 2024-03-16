@@ -22,7 +22,6 @@ const ClientesList = () => {
 
   return (
     <div className='container'>
-      <h2>Clientes</h2>
       <Slider
         autoWidth={true}
         maxWidth={1000}
