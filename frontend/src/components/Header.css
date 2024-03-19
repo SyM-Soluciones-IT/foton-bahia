@@ -23,7 +23,8 @@ header{
 }
 
 
-@media (min-width: 767px) {
+/* Pantallas grandes */
+@media (min-width: 992px) {
   .nav-link:hover{
     color: white !important;
     background-color: #ed4234 !important;
@@ -31,12 +32,7 @@ header{
   .navbar-nav .dropdown-menu{
     position: static;
   }
-  
-  
-}
 
-/* Pantallas grandes */
-@media (min-width: 992px) {
   .ml-auto .nav-link {
     margin-top: 0!important; /* Elimina el margen en pantallas grandes */
   }

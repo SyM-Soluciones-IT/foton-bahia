@@ -29,7 +29,7 @@ const MarcaList = () => {
         duration={20}
         pauseOnHover={true}
         blurBorders={false}
-        blurBoderColor={'#fff'}
+        blurBoderColor={'black'}
         className="centered-slider"
         infinite={true}
       >

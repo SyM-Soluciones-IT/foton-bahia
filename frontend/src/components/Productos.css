@@ -74,13 +74,40 @@
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
+/* .card{
+  border-radius: 10px;
+  min-height: 350px;
+  border: solid #321f56 1px !important;
+  margin-top: 10px;
+} */
+
+.btn{
+  background-color: #321f56;
+  border:#321f56 !important;
+}
+
+.btn:hover{
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.container-categorias{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dropdown-menu{
+  background-color: gray !important;
+  width: 100% !important;
+  border-radius: 0px !important;
+  transform: translate(0px, 23px) !important;
+}
 
 
 @media (min-width: 768px) {
   .card{
-  width: 70%;
-  border-radius: 10px;
-  border: solid black 1px !important;
+  width: 65%;
   }
   .card-img-top{
     width: 70%;
@@ -91,10 +118,7 @@
     display: flex;
     justify-content: center;
   }
-  .btn{
-    background-color: #321f56;
-    border:#321f56 !important;
-  }
+  
   .btn:hover{
     background-color: #4f45a7;
     color: white;
@@ -106,4 +130,6 @@
   .bg-custom{
     background-color: #ca173e;
   }
+
+
 }

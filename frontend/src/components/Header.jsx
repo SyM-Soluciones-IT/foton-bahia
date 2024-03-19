@@ -1,19 +1,25 @@
-// Header.jsx
+//Header
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import axios from "axios";
 import logoFoton from "../assets/foton-logo-h-nobg.png";
 import logoBahiaMobility from "../assets/logo-bahia-mobility.png";
 import "./Header.css";
 
-const Header = ({ setSelectedCategory }) => {
-  const [selectedSection, setSelectedSection] = useState(null);
+const Header = ({ onSectionChange }) => {
   const [categorias, setCategorias] = useState([]);
+  const [selectedSection, setSelectedSection] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     obtenerCategorias();
+    updateSelectedSection(); // Actualizar la sección seleccionada al montar el componente
   }, []);
+
+  useEffect(() => {
+    updateSelectedSection(); // Actualizar la sección seleccionada cuando cambie la ubicación
+  }, [location]);
 
   const obtenerCategorias = async () => {
     try {
@@ -28,26 +34,30 @@ const Header = ({ setSelectedCategory }) => {
     }
   };
 
+  const updateSelectedSection = () => {
+    // Obtener la ruta actual y compararla con las opciones del navbar
+    const pathname = location.pathname;
+    if (pathname === "/") {
+      setSelectedSection("inicio");
+    } else if (pathname === "/repuestos") {
+      setSelectedSection("repuestos");
+    } else if (pathname === "/contacto") {
+      setSelectedSection("contacto");
+    } else {
+      // Obtener la sección de la ruta de productos si corresponde
+      const categoria = pathname.split("/")[2];
+      setSelectedSection(categoria);
+    }
+  };
+
   const handleToggleClick = () => {
     let button = document.getElementById("responsive-navbar-toggle");
     button.click();
   };
 
-  const handleInicioClick = () => {
-    setSelectedSection("inicio");
-    setSelectedCategory(""); // Agregar esta línea
-    handleToggleClick();
-  };
-
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-    setSelectedSection(category); // Otra sección a destacar
-    handleToggleClick();
-  };
-
   const handleSectionClick = (section) => {
-    setSelectedSection(section);
-    handleCategoryClick(section); // Usa la misma función de manejo de categorías
+    onSectionChange(section);
+    handleToggleClick();
   };
 
   return (
@@ -105,11 +115,11 @@ const Header = ({ setSelectedCategory }) => {
                   padding: "10px",
                   marginTop: "10px",
                 }}
-                onClick={handleInicioClick}
+                onClick={() => handleSectionClick("inicio")}
               >
                 Inicio
               </Nav.Link>
-              <NavDropdown title="Nuestros vehículos" id="nav-dropdown">
+              <NavDropdown title="Nuestros vehículos" id="nav-dropdown" >
   {categorias.map((categoria) => (
     <NavDropdown.Item
       key={categoria._id}
@@ -122,7 +132,7 @@ const Header = ({ setSelectedCategory }) => {
         borderRadius: "20px",
         padding: "10px",
       }}
-      onClick={() => handleCategoryClick(categoria.name)}
+      onClick={() => handleSectionClick(categoria.name)}
     >
       {categoria.name}
     </NavDropdown.Item>
@@ -134,7 +144,7 @@ const Header = ({ setSelectedCategory }) => {
                 style={{
                   textDecoration: "none",
                   backgroundColor:
-                    selectedSection === "repuestos" ? "#333333" : "transparent",
+                    selectedSection === "repuestos" ? "#ca173e" : "transparent",
                   color: selectedSection === "repuestos" ? "white" : "inherit",
                   borderRadius: "20px",
                   padding: "10px",
@@ -149,7 +159,7 @@ const Header = ({ setSelectedCategory }) => {
                 style={{
                   textDecoration: "none",
                   backgroundColor:
-                    selectedSection === "contacto" ? "#333333" : "transparent",
+                    selectedSection === "contacto" ? "#ca173e" : "transparent",
                   color: selectedSection === "contacto" ? "white" : "inherit",
                   borderRadius: "20px",
                   padding: "10px",

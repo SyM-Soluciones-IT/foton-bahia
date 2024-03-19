@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import './Productos.css';
+import { RxHamburgerMenu } from "react-icons/rx";
+import "./Productos.css";
 
-const ProductosList = ({ setSelectedCategory }) => {
+const ProductosList = ({ onSectionChange, selectedSection }) => {
   const [categorias, setCategorias] = useState([]);
-  const [selectedCategory, setSelectedCategoryLocal] = useState(null); // Cambiar setSelectedCategory a setSelectedCategoryLocal
-  const [selectedSection, setSelectedSection] = useState(null);
   const [productos, setProductos] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   const { categoria } = useParams();
   const navigate = useNavigate();
 
@@ -23,15 +21,8 @@ const ProductosList = ({ setSelectedCategory }) => {
     }
   }, [categoria]);
 
-  const handleToggleClick = () => {
-    let button = document.getElementById("responsive-navbar-toggle");
-    button.click();
-  };
-
   const handleSectionClick = (section) => {
-    setSelectedCategory(section);
-    setSelectedCategoryLocal(section);
-    handleToggleClick();
+    onSectionChange(section);
   };
 
   const obtenerCategorias = async () => {
@@ -69,44 +60,75 @@ const ProductosList = ({ setSelectedCategory }) => {
 
   return (
     <div className="container contenedor">
-      <h2 className="text-center">{categoria}</h2>
-      <div className="container-categorias" style={{ backgroundColor: "gray", "color": "white"}}>
-        <h3 className="text-center mt-4 mb-3">Conoce todos nuestros vehículos</h3>
-        <NavDropdown title="Nuestros vehículos" id="nav-dropdown">
+    <h2 className="text-center d-none d-md-block">{categoria}</h2>
+    <div className="container-categorias" style={{ backgroundColor: "gray", color: "white" }}>
+      <h3 className="text-center mt-4 mb-3">Conoce todos nuestros vehículos</h3>
+      <NavDropdown title={<RxHamburgerMenu />} id="nav-dropdown" className="d-lg-none justify-content-center" style={{ width: "100%" }} flip>
         {categorias.map((categoria) => (
-          <NavDropdown.Item
+          <NavDropdown.Item 
             key={categoria._id}
             as={Link}
             to={`/productos/${categoria.name}`}
             style={{
-              backgroundColor:
-                selectedCategory === categoria.name ? "#ca173e" : "transparent",
-              color:
-                selectedCategory === categoria.name ? "white" : "inherit",
+              backgroundColor: selectedSection === categoria.name ? "#ca173e" : "transparent",
+              color: selectedSection === categoria.name ? "white" : "inherit",
               borderRadius: "20px",
               padding: "10px",
             }}
             onClick={() => {
               handleSectionClick(categoria.name);
-              setSelectedCategoryLocal(categoria.name); // Cambiar setSelectedCategory a setSelectedCategoryLocal
             }}
           >
             {categoria.name}
+            
           </NavDropdown.Item>
         ))}
       </NavDropdown>
-      </div>
+      <NavDropdown title={false} id="nav-dropdown-computer" className="justify-content-center" style={{ width: "100%" }} flip>
+      <div className="d-none d-lg-inline-flex">
+          {categorias.map((categoria) => (
+            <Link
+              key={categoria._id}
+              to={`/productos/${categoria.name}`}
+              className="categoria-link"
+              style={{
+                backgroundColor: selectedSection === categoria.name ? "#ca173e" : "transparent",
+                color: selectedSection === categoria.name ? "white" : "inherit",
+                borderRadius: "20px",
+                padding: "10px",
+                margin: "5px",
+              }}
+              onClick={() => {
+                handleSectionClick(categoria.name);
+              }}
+            >
+              {categoria.name}
+            </Link>
+          ))}
+        </div>
+      </NavDropdown>
+    </div>
       <div className="row">
         {productos.map((producto) => (
           <div key={producto._id} className="col-md-4 mb-4">
-            <div className="card text-center primary border-primary">
-              <img className="card-img-top" src={producto.image} alt={producto.name} />
+            <div
+              className="card text-center border-black"
+              style={{
+                borderRadius: "10px",
+                minHeight: "350px",
+                marginTop: "10px",
+              }}
+            >
+              <img
+                className="card-img-top"
+                src={producto.image}
+                alt={producto.name}
+              />
               <div className="card-body">
                 <h5 className="card-title">{producto.name}</h5>
                 <p className="card-text">{producto.description}</p>
                 <p className="card-text">
-                  <strong>Category:</strong>{" "}
-                  {categoria || "No especificada"}
+                  <strong>Category:</strong> {categoria || "No especificada"}
                 </p>
                 <p className="card-text">
                   <strong>Specs:</strong> {producto.specs}

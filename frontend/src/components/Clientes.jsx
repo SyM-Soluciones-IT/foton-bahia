@@ -34,8 +34,8 @@ const ClientesList = () => {
       >
         {clientes.map(cliente => (
           <Slider.Slide key={cliente._id} className="centered-slide">
-            <Card className="image-card">
-              <CardBody className="image-card-body">
+            <Card className="image-card"  >
+              <CardBody className="image-card-body" >
                 <CardImg src={cliente.image} alt={cliente.name} className="card-img" />
               </CardBody>
             </Card>
