@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, Modal, Button } from "react-bootstrap"; // Asegúrate de importar Modal y Button de react-bootstrap
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import "./Productos.css";
@@ -8,8 +8,10 @@ import "./Productos.css";
 const ProductosList = ({ onSectionChange, selectedSection }) => {
   const [categorias, setCategorias] = useState([]);
   const [productos, setProductos] = useState([]);
-  const [showModal, setShowModal] = useState(false);
   const { categoria } = useParams();
+  const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,8 +23,24 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
     }
   }, [categoria]);
 
+  const handleToggleClick = () => {
+    setIsNavExpanded(!isNavExpanded);
+  };
+
   const handleSectionClick = (section) => {
     onSectionChange(section);
+    if (window.innerWidth <= 992) {
+      handleToggleClick();
+    }
+  };
+
+  const handleCotizarClick = (producto) => {
+    setSelectedProduct(producto);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   const obtenerCategorias = async () => {
@@ -53,61 +71,55 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
     }
   };
 
-  const handleCotizarClick = (producto) => {
-    setProductoSeleccionado(producto);
-    setShowModal(true);
-  };
-
   return (
     <div className="container contenedor">
-    <h2 className="text-center d-none d-md-block">{categoria}</h2>
-    <div className="container-categorias" style={{ backgroundColor: "gray", color: "white" }}>
-      <h3 className="text-center mt-4 mb-3">Conoce todos nuestros vehículos</h3>
-      <NavDropdown title={<RxHamburgerMenu />} id="nav-dropdown" className="d-lg-none justify-content-center" style={{ width: "100%" }} flip>
-        {categorias.map((categoria) => (
-          <NavDropdown.Item 
-            key={categoria._id}
-            as={Link}
-            to={`/productos/${categoria.name}`}
-            style={{
-              backgroundColor: selectedSection === categoria.name ? "#ca173e" : "transparent",
-              color: selectedSection === categoria.name ? "white" : "inherit",
-              borderRadius: "20px",
-              padding: "10px",
-            }}
-            onClick={() => {
-              handleSectionClick(categoria.name);
-            }}
-          >
-            {categoria.name}
-            
-          </NavDropdown.Item>
-        ))}
-      </NavDropdown>
-      <NavDropdown title={false} id="nav-dropdown-computer" className="justify-content-center" style={{ width: "100%" }} flip>
-      <div className="d-none d-lg-inline-flex">
-          {categorias.map((categoria) => (
-            <Link
-              key={categoria._id}
-              to={`/productos/${categoria.name}`}
-              className="categoria-link"
-              style={{
-                backgroundColor: selectedSection === categoria.name ? "#ca173e" : "transparent",
-                color: selectedSection === categoria.name ? "white" : "inherit",
-                borderRadius: "20px",
-                padding: "10px",
-                margin: "5px",
-              }}
-              onClick={() => {
-                handleSectionClick(categoria.name);
-              }}
-            >
-              {categoria.name}
-            </Link>
-          ))}
-        </div>
-      </NavDropdown>
-    </div>
+      <h2 className="text-center">{categoria}</h2>
+      <div
+        className="container-categorias"
+        style={{ backgroundColor: "gray", color: "white" }}
+      >
+        <h3 className="text-center mt-4 mb-3">
+          Conoce todos nuestros vehículos
+        </h3>
+        {/* Navbar para pantallas móviles */}
+        <Navbar
+          expand="lg"
+          className="nav-dropdown-mobile" // Agrega la clase para estilos móviles
+          style={{
+            backgroundColor: "gray",
+            color: "white",
+            width: "100%",
+            border: "transparent",
+          }}
+          expanded={isNavExpanded}
+          onToggle={handleToggleClick}
+        >
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto navbar-categorias">
+              {categorias.map((categoria) => (
+                <Nav.Link
+                  key={categoria._id}
+                  as={Link}
+                  to={`/productos/${categoria.name}`}
+                  style={{
+                    backgroundColor:
+                      selectedSection === categoria.name
+                        ? "#ca213b"
+                        : "gray",
+                    color: "white",
+                  }}
+                  onClick={() => {
+                    handleSectionClick(categoria.name);
+                  }}
+                >
+                  {categoria.name}
+                </Nav.Link>
+              ))}
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      </div>
       <div className="row">
         {productos.map((producto) => (
           <div key={producto._id} className="col-md-4 mb-4">
@@ -145,6 +157,44 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
         ))}
       </div>
       {/* Modal aquí */}
+      {showModal && (
+        <Modal show={showModal} onHide={handleCloseModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Cotizar Producto</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {selectedProduct && (
+              <p>
+                Elija una opción para cotizar el producto{" "}
+                {selectedProduct.name}:
+              </p>
+            )}
+            <Button
+              variant="primary"
+              onClick={() => {
+                const mensaje = encodeURIComponent(
+                  `Hola, quiero cotizar el producto ${selectedProduct.name}`
+                );
+                window.open(`https://wa.me/+5492916446200/?text=${mensaje}`);
+              }}
+            >
+              Cotizar por WhatsApp
+            </Button>{" "}
+            <Button
+              variant="primary"
+              onClick={() => {
+                navigate(
+                  `/contacto?asunto=Cotizacion ${encodeURIComponent(
+                    selectedProduct.name
+                  )}`
+                );
+              }}
+            >
+              Cotizar por Mail
+            </Button>
+          </Modal.Body>
+        </Modal>
+      )}
     </div>
   );
 };

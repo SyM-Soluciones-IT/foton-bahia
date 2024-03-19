@@ -1,7 +1,3 @@
-.contenedor{
-  margin-top: 150px !important;
-}
-
 .modal {
   position: fixed;
   top: 0;
@@ -52,6 +48,7 @@
 /* Estilos para la navbar de categorías */
 .navbar-categorias {
   background-color: gray;
+  margin-top: 10px;
 }
 
 /* Estilo para los botones en la navbar de categorías */
@@ -74,13 +71,6 @@
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-/* .card{
-  border-radius: 10px;
-  min-height: 350px;
-  border: solid #321f56 1px !important;
-  margin-top: 10px;
-} */
-
 .btn{
   background-color: #321f56;
   border:#321f56 !important;
@@ -98,12 +88,31 @@
 }
 
 .dropdown-menu{
-  background-color: gray !important;
   width: 100% !important;
   border-radius: 0px !important;
-  transform: translate(0px, 23px) !important;
+  /* transform: translate(0px, 23px) !important; */
 }
 
+.nav-dropdown-mobile {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 5px;
+}
+
+.nav-dropdown-mobile .dropdown-menu {
+  background-color: black;
+  color: white;
+}
+
+.nav-dropdown-mobile .dropdown-item.active,
+.nav-dropdown-mobile .dropdown-item:hover {
+  background-color: #ca173e !important;
+  color: white !important;
+}
 
 @media (min-width: 768px) {
   .card{

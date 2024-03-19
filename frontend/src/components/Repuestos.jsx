@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, ListGroup } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
 const RepuestosList = () => {
   const [repuestos, setRepuestos] = useState([]);
@@ -19,7 +20,8 @@ const RepuestosList = () => {
   };
 
   return (
-    <Container style={{ marginTop: '150px' }}>
+    <Container>
+      <h2 className='principal-titulo'>Repuestos</h2>
       <ListGroup>
         {repuestos.map((repuesto) => (
           <ListGroup.Item key={repuesto._id}>

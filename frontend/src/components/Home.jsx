@@ -9,7 +9,7 @@ import './Home.css';
 
 const Home = () => {
   return (
-    <div className='container' style={{ marginTop: '150px' }}>
+    <div className='container'>
       <section className="principal">
         <h2  className="principal-titulo">Unico foton en bahia y la zona</h2>
         <p className="principal-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate in veniam nam repellendus expedita facilis autem! Quas aperiam neque exercitationem! Libero maxime magnam repellendus assumenda aliquam blanditiis provident ullam eaque?</p>
@@ -23,7 +23,7 @@ const Home = () => {
         <MarcaList /> {/* Agrega el componente MarcaList */}
       </section>
       <section id="repuestos">
-        <h2 className="principal-titulo">Repuestos</h2>
+        {/* <h2 className="principal-titulo">Repuestos</h2> */}
         <RepuestosList />
       </section>
       <section id="clientes"> {/* Agrega una sección para mostrar las marcas */}
@@ -31,7 +31,7 @@ const Home = () => {
         <ClientesList /> {/* Agrega el componente MarcaList */}
       </section>
       <section id="contacto">
-        <h2 className="principal-titulo">Contacto</h2>
+        {/* <h2 className="principal-titulo">Contacto</h2> */}
         <ContactForm />
       </section>
     </div>

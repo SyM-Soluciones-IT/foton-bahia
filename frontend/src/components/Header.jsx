@@ -1,7 +1,6 @@
-//Header
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import axios from "axios";
 import logoFoton from "../assets/foton-logo-h-nobg.png";
 import logoBahiaMobility from "../assets/logo-bahia-mobility.png";
@@ -9,16 +8,18 @@ import "./Header.css";
 
 const Header = ({ onSectionChange }) => {
   const [categorias, setCategorias] = useState([]);
-  const [selectedSection, setSelectedSection] = useState(null);
+  const [showCategories, setShowCategories] = useState(false);
+  const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const [selectedSection, setSelectedSection] = useState("inicio"); // Se inicializa selectedSection con "inicio"
   const location = useLocation();
 
   useEffect(() => {
     obtenerCategorias();
-    updateSelectedSection(); // Actualizar la sección seleccionada al montar el componente
+    updateSelectedSection();
   }, []);
 
   useEffect(() => {
-    updateSelectedSection(); // Actualizar la sección seleccionada cuando cambie la ubicación
+    updateSelectedSection();
   }, [location]);
 
   const obtenerCategorias = async () => {
@@ -35,8 +36,7 @@ const Header = ({ onSectionChange }) => {
   };
 
   const updateSelectedSection = () => {
-    // Obtener la ruta actual y compararla con las opciones del navbar
-    const pathname = location.pathname;
+    const pathname = decodeURIComponent(location.pathname); // Decodificar el pathname
     if (pathname === "/") {
       setSelectedSection("inicio");
     } else if (pathname === "/repuestos") {
@@ -44,38 +44,36 @@ const Header = ({ onSectionChange }) => {
     } else if (pathname === "/contacto") {
       setSelectedSection("contacto");
     } else {
-      // Obtener la sección de la ruta de productos si corresponde
-      const categoria = pathname.split("/")[2];
-      setSelectedSection(categoria);
+      // Aquí necesitas encontrar la categoría correspondiente al pathname
+      const categoria = categorias.find(cat => `/productos/${cat.name}` === pathname);
+      if (categoria) {
+        setSelectedSection(categoria.name);
+      } else {
+        setSelectedSection(""); // Si no se encuentra ninguna categoría, selecciona una cadena vacía
+      }
     }
   };
 
-  const handleToggleClick = () => {
-    let button = document.getElementById("responsive-navbar-toggle");
-    button.click();
+  const handleCategoryClick = () => {
+    setShowCategories(!showCategories);
+  };
+
+  const handleNavToggleClick = () => {
+    setIsNavExpanded(!isNavExpanded);
+    setShowCategories(false);
   };
 
   const handleSectionClick = (section) => {
     onSectionChange(section);
-    handleToggleClick();
+    if (window.innerWidth <= 992) {
+      setIsNavExpanded(false);
+    }
+    setShowCategories(false);
   };
 
   return (
-    <header
-      style={{
-        position: "fixed",
-        top: 0,
-        backgroundColor: "#f8f9fa",
-        zIndex: 100,
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <div
-        className="d-flex justify-content-between"
-        style={{ padding: "0 3%" }}
-      >
+    <header>
+      <div className="d-flex justify-content-between header-logo">
         <Link to="/">
           <img src={logoFoton} alt="Logo Foton" width={150} />
         </Link>
@@ -85,69 +83,93 @@ const Header = ({ onSectionChange }) => {
         <Navbar
           variant="dark"
           expand="lg"
-          style={{
-            backgroundColor: "black",
-            color: "white",
-            position: "sticky",
-            zIndex: 100,
-            paddingLeft: "3%",
-            paddingRight: "3%",
-          }}
+          className="mobile-navbar"
+          expanded={isNavExpanded}
         >
           <Navbar.Toggle
-            id="responsive-navbar-toggle"
             aria-controls="responsive-navbar-nav"
+            onClick={handleNavToggleClick}
           />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav
-              className="ml-auto"
-              style={{ display: "flex", justifyContent: "space-evenly" }}
-            >
+            <Nav className="mr-auto">
               <Nav.Link
                 as={Link}
                 to="/"
+                className="nav-link-inicio"
                 style={{
-                  textDecoration: "none",
                   backgroundColor:
-                    selectedSection === "inicio" ? "#ca173e" : "transparent",
-                  color: selectedSection === "inicio" ? "white" : "inherit",
-                  borderRadius: "20px",
-                  padding: "10px",
-                  marginTop: "10px",
+                    selectedSection === "inicio" ? "#ca213b" : "black",
                 }}
                 onClick={() => handleSectionClick("inicio")}
               >
                 Inicio
               </Nav.Link>
-              <NavDropdown title="Nuestros vehículos" id="nav-dropdown" >
-  {categorias.map((categoria) => (
-    <NavDropdown.Item
-      key={categoria._id}
-      as={Link}
-      to={`/productos/${categoria.name}`}
-      style={{
-        backgroundColor:
-          selectedSection === categoria.name ? "#ca173e" : "transparent",
-        color: selectedSection === categoria.name ? "white" : "inherit",
-        borderRadius: "20px",
-        padding: "10px",
-      }}
-      onClick={() => handleSectionClick(categoria.name)}
-    >
-      {categoria.name}
-    </NavDropdown.Item>
-  ))}
-</NavDropdown>
+              <div className="vehiculos-dropdown-container d-lg-none">
+                <div
+                  className="nav-link dropdown-toggle custom-button"
+                  onClick={handleCategoryClick}
+                  style={{ cursor: "pointer", width: "fit-content" }}
+                >
+                  Nuestros vehículos
+                </div>
+                {showCategories && (
+                  <Nav className="mr-auto show-categories flex-column">
+                    {categorias.map((categoria) => (
+                      <Nav.Link
+                        key={categoria._id}
+                        as={Link}
+                        to={`/productos/${categoria.name}`}
+                        style={{
+                          backgroundColor:
+                            selectedSection === categoria.name
+                              ? "#ca213b"
+                              : "black",
+                        }}
+                        onClick={() => {
+                          handleSectionClick(categoria.name);
+                          handleCategoryClick();
+                        }}
+                      >
+                        {categoria.name}
+                      </Nav.Link>
+                    ))}
+                  </Nav>
+                )}
+              </div>
+              <NavDropdown
+                title="Nuestros vehículos"
+                id="basic-nav-dropdown"
+                className="d-none d-lg-block"
+                onClick={handleCategoryClick}
+              >
+                {categorias.map((categoria) => (
+                  <NavDropdown.Item
+                    key={categoria._id}
+                    as={Link}
+                    to={`/productos/${categoria.name}`}
+                    style={{
+                      backgroundColor:
+                        selectedSection === categoria.name
+                          ? "#ca213b"
+                          : "black",
+                        color: "white",
+                        border: "transparent",
+                    }}
+                    onClick={() => {
+                      handleSectionClick(categoria.name);
+                      handleCategoryClick();
+                    }}
+                  >
+                    {categoria.name}
+                  </NavDropdown.Item>
+                ))}
+              </NavDropdown>
               <Nav.Link
                 as={Link}
                 to="/repuestos"
                 style={{
-                  textDecoration: "none",
                   backgroundColor:
-                    selectedSection === "repuestos" ? "#ca173e" : "transparent",
-                  color: selectedSection === "repuestos" ? "white" : "inherit",
-                  borderRadius: "20px",
-                  padding: "10px",
+                    selectedSection === "repuestos" ? "#ca213b" : "black",
                 }}
                 onClick={() => handleSectionClick("repuestos")}
               >
@@ -157,12 +179,8 @@ const Header = ({ onSectionChange }) => {
                 as={Link}
                 to="/contacto"
                 style={{
-                  textDecoration: "none",
                   backgroundColor:
-                    selectedSection === "contacto" ? "#ca173e" : "transparent",
-                  color: selectedSection === "contacto" ? "white" : "inherit",
-                  borderRadius: "20px",
-                  padding: "10px",
+                    selectedSection === "contacto" ? "#ca213b" : "black",
                 }}
                 onClick={() => handleSectionClick("contacto")}
               >
