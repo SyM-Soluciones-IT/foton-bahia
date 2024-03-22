@@ -9,17 +9,21 @@ import './Home.css';
 
 const Home = () => {
   return (
-    <div className='container'>
+    <div>
       <section className="principal">
-        <h2  className="principal-titulo">Unico foton en bahia y la zona</h2>
-        <p className="principal-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate in veniam nam repellendus expedita facilis autem! Quas aperiam neque exercitationem! Libero maxime magnam repellendus assumenda aliquam blanditiis provident ullam eaque?</p>
+        <h2 className="principal-titulo">Concesionario Oficial Foton en Bahia Blanca y la zona</h2>
+        {/* <h2>FOTON BAHIA</h2> */}
+        <div className='container'>
+          <p className="principal-texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate in veniam nam repellendus expedita facilis autem! Quas aperiam neque exercitationem! Libero maxime magnam repellendus assumenda aliquam blanditiis provident ullam eaque?</p>
+        </div>
       </section>
+      <img src="https://i.ibb.co/RhDkQYZ/concesionaria-h-img.jpg" alt="Imagen de la concesionaria" style={{width: '100vw', marginBottom: '1em'}}/>
       <section id="productos">
-        <h2  className="principal-titulo">Nuestros Vehiculos</h2>
+        <h2 className="principal-titulo">Nuestros Vehiculos</h2>
         <CategoriaList />
       </section>
-      <h2 className="principal-titulo">Marcas</h2>
       <section  id="marcas"> {/* Agrega una sección para mostrar las marcas */}
+        <h2 className="principal-titulo">Marcas</h2>
         <MarcaList /> {/* Agrega el componente MarcaList */}
       </section>
       <section id="repuestos">

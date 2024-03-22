@@ -9,6 +9,7 @@ import Categorias from "./components/Categorias";
 import Productos from "./components/Productos";
 import Repuestos from "./components/Repuestos";
 import Contacto from "./components/Contacto";
+import About from "./components/About";
 
 const App = () => {
   const [selectedSection, setSelectedSection] = useState(null);
@@ -39,6 +40,7 @@ const App = () => {
           />
           <Route exact path="/repuestos" element={<Repuestos />} />
           <Route exact path="/contacto" element={<Contacto />} />
+          <Route exact path="/about" element={<About />} />
         </Routes>
       </div>
     </Router>

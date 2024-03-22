@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Navbar, Nav, Modal, Button } from "react-bootstrap"; // Asegúrate de importar Modal y Button de react-bootstrap
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate, Link, useLocation  } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import "./Productos.css";
 
-const ProductosList = ({ onSectionChange, selectedSection }) => {
+const ProductosList = ({ onSectionChange, selectedSection}) => {
   const [categorias, setCategorias] = useState([]);
   const [productos, setProductos] = useState([]);
   const { categoria } = useParams();
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,7 +22,14 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
     } else {
       setProductos([]);
     }
-  }, [categoria]);
+    updateSelectedSection();
+  }, [categoria, location]); // Incluir location en las dependencias
+
+  const updateSelectedSection = () => {
+    const pathname = decodeURIComponent(location.pathname);
+    const categoriaName = pathname.split("/")[2]; // Obtener la categoría de la URL
+    onSectionChange(categoriaName);
+  };
 
   const handleToggleClick = () => {
     setIsNavExpanded(!isNavExpanded);
@@ -73,7 +81,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
 
   return (
     <div className="container contenedor">
-      <h2 className="text-center">{categoria}</h2>
+      <h2 className="principal-titulo">{categoria}</h2>
       <div
         className="container-categorias"
         style={{ backgroundColor: "gray", color: "white" }}

@@ -1,19 +1,27 @@
 .principal{
   margin-top: 1em;
   margin-bottom: 1em;
-  padding: 1em;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 .principal-titulo{
+  margin-top: 1em;
   text-align: center;
   font-family: 'Poppins', sans-serif;;
   font-size: 2.5rem;
   font-weight: 700;
+  color: #ca173e;
 }
   
 
 .principal-texto{
   text-align: center;
   font-family: 'Poppins', sans-serif;;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 500;
+}
+
+#productos{
+  margin-left: 10%;
+  margin-right: 10%;
 }

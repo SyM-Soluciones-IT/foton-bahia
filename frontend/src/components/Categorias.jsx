@@ -28,7 +28,7 @@ const CategoriaList = () => {
     <Container>
       <div className="row">
         {categorias.map(categoria => (
-          <div key={categoria._id} className="col-lg-4 col-md-6 col-sm-12 mb-4 d-flex align-content-center border-0 flex-column flex-wrap">
+          <div key={categoria._id} className="col-lg col-md-6 col-sm-12 mb-4 d-flex align-content-center border-0 flex-column flex-wrap">
               <div className='div-category' style={{ width: 'fit-content'}}>
                 <Link to={`/productos/${categoria.name}`} className="category-link">
                   <img src={categoria.image} alt={categoria.name} className="category-image" />
