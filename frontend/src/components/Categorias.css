@@ -8,8 +8,8 @@
 
 /* Estilos para la imagen de la categoría */
 .category-image {
-  transition: transform 0.3s ease; /* Agrega una transición suave */
-  height: 210px; /* Ajusta la altura de la imagen de la categoría */
+  transition: transform 0.3s; /* Agrega una transición suave */
+  height: 260px; /* Ajusta la altura de la imagen de la categoría */
   width: 210px; /* Ajusta el ancho de la imagen de la categoría */
   border-radius: 10px;
 }

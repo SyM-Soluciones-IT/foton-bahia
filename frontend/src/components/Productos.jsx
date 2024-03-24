@@ -86,7 +86,7 @@ const ProductosList = ({ onSectionChange, selectedSection}) => {
         className="container-categorias"
         style={{ backgroundColor: "gray", color: "white" }}
       >
-        <h3 className="text-center mt-4 mb-3">
+        <h3 className="text-center mt-4 mb-3" >
           Conoce todos nuestros vehículos
         </h3>
         {/* Navbar para pantallas móviles */}
@@ -179,6 +179,7 @@ const ProductosList = ({ onSectionChange, selectedSection}) => {
             )}
             <Button
               variant="primary"
+              style={{ marginRight: "5px" ,marginBottom:'5px'}}
               onClick={() => {
                 const mensaje = encodeURIComponent(
                   `Hola, quiero cotizar el producto ${selectedProduct.name}`
@@ -190,6 +191,7 @@ const ProductosList = ({ onSectionChange, selectedSection}) => {
             </Button>{" "}
             <Button
               variant="primary"
+              style={{ marginRight: "5px" ,marginBottom:'5px'}}
               onClick={() => {
                 navigate(
                   `/contacto?asunto=Cotizacion ${encodeURIComponent(

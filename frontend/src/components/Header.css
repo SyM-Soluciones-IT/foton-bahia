@@ -33,6 +33,7 @@ h1{
   margin-right: 5px;
   font-size: 1.2em;
   font-weight: bold;
+  padding: 10px 15px!important;
 }
 
 .nav-right{
@@ -84,7 +85,7 @@ h1{
   .nav-link:hover{
     color: white !important;
     background-color: #ed4234 !important;
-    padding: 10px 15px!important;
+    
   }
   .navbar-nav .dropdown-menu{
     position: static;
@@ -94,7 +95,6 @@ h1{
     margin-top: 0!important; /* Elimina el margen en pantallas grandes */
   }
   
-
   .dropdown-item:hover{
     color: white !important;
     background-color: #ed4234 !important;
@@ -104,7 +104,11 @@ h1{
   }
 
   .dropdown-toggle{
-    padding: 10px 15px!important;
+    padding: 10px !important;
   }
-
+  
+  .dropdown-toggle::after{
+    font-size: x-large !important;
+    vertical-align: middle !important;
+  }
 }
