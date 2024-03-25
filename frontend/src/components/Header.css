@@ -28,17 +28,20 @@ h1{
 
 .mobile-navbar .nav-link {
   text-decoration: none;
-  border-radius: 20px;
   color: white;
-  margin-right: 5px;
+  margin-right: 0px;
   font-size: 1.2em;
   font-weight: bold;
 }
 
 .nav-right{
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
   position: fixed !important;
   top: 90px !important;
   right: 20px !important;
+  margin-top: 8px;
 }
 
 .mobile-navbar .nav-link:last-child {
@@ -56,7 +59,6 @@ h1{
 }
 
 #nav-dropdown{
-  border-radius: 20px !important;
   color: white !important;
 }
 
@@ -67,6 +69,15 @@ h1{
 }
 .navbar-nav .dropdown-menu{
   position: absolute;
+}
+
+.vehiculos-dropdown{
+  padding: 1px 5px 2px !important;
+  margin-right: 0px !important;
+}
+
+.dropdown-toggle::after {
+  font-size: 1.5rem; /* Ajusta el tamaño del icono */
 }
 
 @media (min-width: 540px){
@@ -84,7 +95,7 @@ h1{
   .nav-link:hover{
     color: white !important;
     background-color: #ed4234 !important;
-    padding: 10px 15px!important;
+    /* padding: 10px 15px!important; */
   }
   .navbar-nav .dropdown-menu{
     position: static;
@@ -103,8 +114,23 @@ h1{
     margin-top: 0;
   }
 
-  .dropdown-toggle{
-    padding: 10px 15px!important;
+  .mobile-navbar .nav-link {
+    margin-right: 5px;
+  }
+
+  .mobile-navbar .nav-link:nth-child(1) {
+    margin-right: 0px;
+  }
+
+  .nav-right{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center;
+    position: relative !important;
+    top: 0px !important;
+    right: 0px !important;
+    margin-top: 0px !important;
   }
 
 }

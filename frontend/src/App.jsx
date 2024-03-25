@@ -10,9 +10,11 @@ import Productos from "./components/Productos";
 import Repuestos from "./components/Repuestos";
 import Contacto from "./components/Contacto";
 import About from "./components/About";
+import ScrollToTopButton from "./components/ScrollToTopButton"; 
 
 const App = () => {
   const [selectedSection, setSelectedSection] = useState(null);
+  const [smoothScrollingEnabled, setSmoothScrollingEnabled] = useState(true);
 
   const handleSectionChange = (section) => {
     setSelectedSection(section);
@@ -40,8 +42,9 @@ const App = () => {
           />
           <Route exact path="/repuestos" element={<Repuestos />} />
           <Route exact path="/contacto" element={<Contacto />} />
-          <Route exact path="/about" element={<About />} />
+          <Route exact path="/nosotros" element={<About />} />
         </Routes>
+        <ScrollToTopButton smoothScrollingEnabled={smoothScrollingEnabled} /> {/* Pasa la variable de estado como prop */}
       </div>
     </Router>
   );

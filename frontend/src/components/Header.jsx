@@ -75,6 +75,8 @@ const Header = ({ onSectionChange }) => {
       setSelectedSection("repuestos");
     } else if (pathname === "/contacto") {
       setSelectedSection("contacto");
+    } else if (pathname === "/nosotros") {
+      setSelectedSection("nosotros");
     } else {
       const categoria = categorias.find(
         (cat) => `/productos/${cat.name}` === pathname
@@ -119,7 +121,7 @@ const Header = ({ onSectionChange }) => {
         <Link to="/">
           <img src={logoFoton} alt="Logo Foton" width={150} />
         </Link>
-        <h1>FOTON BAHIA</h1>
+        {/* <h1>FOTON BAHIA</h1> */}
         {/* <h1>CONCESIONARIO OFICIAL</h1> */}
         <img src={logoBahiaMobility} alt="Logo Bahia Mobility" width={80} />
       </div>
@@ -135,7 +137,7 @@ const Header = ({ onSectionChange }) => {
             onClick={handleNavToggleClick}
           />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto responsive-nav">
+            <Nav className="mr-auto responsive-nav d-flex align-items-center">
               <Nav.Link
                 as={Link}
                 to="/"
@@ -144,10 +146,13 @@ const Header = ({ onSectionChange }) => {
                   backgroundColor:
                     selectedSection === "inicio" ? "#ca213b" : "black",
                   color: "white",
-                  padding: "10px 15px",
-                  borderRadius: "20px",
+                  padding: "1px 5px 2px",
                 }}
-                onClick={() => handleSectionClick("inicio")}
+                onClick={() => {
+                  handleSectionClick("inicio");
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  } 
+                }
               >
                 Inicio
               </Nav.Link>
@@ -155,12 +160,12 @@ const Header = ({ onSectionChange }) => {
                 <div
                   className="nav-link dropdown-toggle custom-button"
                   onClick={handleCategoryClick}
-                  style={{ cursor: "pointer", width: "fit-content", padding: "10px 15px", borderRadius: "20px"}}
+                  style={{ cursor: "pointer", width: "fit-content", padding: "1px 5px 2px" }}
                 >
                   Nuestros vehículos
                 </div>
                 {showCategories && (
-                  <Nav className="mr-auto show-categories flex-column">
+                  <Nav className="mr-auto show-categories flex-column align-items-center">
                     {categorias.map((categoria) => (
                       <Nav.Link
                         key={categoria._id}
@@ -172,12 +177,12 @@ const Header = ({ onSectionChange }) => {
                               ? "#ca213b"
                               : "black",
                           color: "white",
-                          padding: "10px 15px",
-                          borderRadius: "20px",
+                          padding: "1px 5px 2px",
                         }}
                         onClick={() => {
                           handleSectionClick(categoria.name);
                           handleCategoryClick();
+                          window.scrollTo({ top: 0, behavior: "smooth" });
                         }}
                       >
                         {categoria.name}
@@ -189,7 +194,7 @@ const Header = ({ onSectionChange }) => {
               <NavDropdown
                 title="Nuestros vehículos"
                 id="basic-nav-dropdown"
-                className="d-none d-lg-block"
+                className="d-none d-lg-block vehiculos-dropdown"
                 onClick={handleCategoryClick}
               >
                 {categorias.map((categoria) => (
@@ -203,13 +208,13 @@ const Header = ({ onSectionChange }) => {
                           ? "#ca213b"
                           : "black",
                       color: "white",
-                      padding: "10px 15px",
-                      borderRadius: "20px",
+                      padding: "1px 5px 2px",
                       border: "transparent",
                     }}
                     onClick={() => {
                       handleSectionClick(categoria.name);
                       handleCategoryClick();
+                      window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
                   >
                     {categoria.name}
@@ -223,10 +228,13 @@ const Header = ({ onSectionChange }) => {
                   backgroundColor:
                     selectedSection === "repuestos" ? "#ca213b" : "black",
                   color: "white",
-                  padding: "10px 15px",
-                  borderRadius: "20px",
+                  padding: "1px 5px 2px",
                 }}
-                onClick={() => handleSectionClick("repuestos")}
+                onClick={() => {
+                  handleSectionClick("repuestos");
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }
               >
                 Repuestos
               </Nav.Link>
@@ -237,8 +245,7 @@ const Header = ({ onSectionChange }) => {
                   backgroundColor:
                     selectedSection === "contacto" ? "#ca213b" : "black",
                   color: "white",
-                  padding: "10px 15px",
-                  borderRadius: "20px",
+                  padding: "1px 5px 2px",
                 }}
                 onClick={() => handleSectionClick("contacto")}
               >
@@ -246,27 +253,29 @@ const Header = ({ onSectionChange }) => {
               </Nav.Link>
               <Nav.Link
                 as={Link}
-                to="/about"
+                to="/nosotros"
                 style={{
                   backgroundColor:
                     selectedSection === "nosotros" ? "#ca213b" : "black",
                   color: "white",
-                  padding: "10px 15px",
-                  borderRadius: "20px",
+                  padding: "1px 5px 2px",
                 }}
-                onClick={() => handleSectionClick("nosotros")}
+                onClick={() => {
+                  handleSectionClick("nosotros");
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }
               >
                 Nosotros
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
-          <Nav className="d-flex flex-row nav-right">
+          <Nav className="nav-right">
             <Nav.Link
               style={{
                 backgroundColor: "#ca213b",
                 color: "white",
-                padding: "10px 15px",
-                borderRadius: "20px",
+                padding: "1px 5px 2px",
                 marginRight: "10px",
               }}
               onClick={() => handleCotizarClick("contacto")}
@@ -277,8 +286,7 @@ const Header = ({ onSectionChange }) => {
               style={{
                 backgroundColor: "#ca213b", // Color verde de WhatsApp
                 color: "white",
-                padding: "10px 15px",
-                borderRadius: "20px",
+                padding: "1px 5px 2px",
               }}
               onClick={() => {
                 const mensaje = encodeURIComponent(
