@@ -23,12 +23,14 @@ const partsRouter = require('./routes/repuestos');
 const contactRouter = require('./routes/contacto');
 const marcasRouter = require('./routes/marcas'); // Agregar la ruta para las marcas
 const clientesRouter = require('./routes/clientes');
+const usadosRouter = require('./routes/usados');
 
 app.use('/api/productos', productosRouter); // Cambia la ruta aquí
 app.use('/api/repuestos', partsRouter);
 app.use('/api/contacto', contactRouter);
 app.use('/api/marcas', marcasRouter);
 app.use('/api/clientes', clientesRouter);
+app.use('/api/usados', usadosRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

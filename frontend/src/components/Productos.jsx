@@ -153,6 +153,14 @@ const ProductosList = ({ onSectionChange, selectedSection}) => {
                 <p className="card-text">
                   <strong>Specs:</strong> {producto.specs}
                 </p>
+                <a
+                  href={producto.datasheet}
+                  target="_self"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                >
+                  Descargar ficha técnica
+                </a>
                 <button
                   className="btn btn-primary"
                   onClick={() => handleCotizarClick(producto)}

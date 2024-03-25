@@ -34,6 +34,7 @@ const Home = () => {
         <h2 className="principal-titulo-home">Clientes</h2>
         <ClientesList /> {/* Agrega el componente MarcaList */}
       </section>
+    
       <section id="contacto">
         {/* <h2 className="principal-titulo">Contacto</h2> */}
         <ContactForm />

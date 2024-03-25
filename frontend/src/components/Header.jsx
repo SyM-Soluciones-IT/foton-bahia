@@ -73,6 +73,8 @@ const Header = ({ onSectionChange }) => {
       setSelectedSection("inicio");
     } else if (pathname === "/repuestos") {
       setSelectedSection("repuestos");
+    } else if (pathname === "/usados") {
+      setSelectedSection("usados");
     } else if (pathname === "/contacto") {
       setSelectedSection("contacto");
     } else if (pathname === "/nosotros") {
@@ -238,7 +240,24 @@ const Header = ({ onSectionChange }) => {
               >
                 Repuestos
               </Nav.Link>
-              
+              <Nav.Link
+                as={Link}
+                to="/usados"
+                className="nav-link-usados"
+                style={{
+                  backgroundColor:
+                    selectedSection === "usados" ? "#ca213b" : "black",
+                  color: "white",
+                  padding: "1px 5px 2px",
+                }}
+                onClick={() => {
+                  handleSectionClick("usados");
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  } 
+                }
+              >
+                Usados
+              </Nav.Link>
               <Nav.Link
                 as={Link}
                 to="/contacto"
@@ -248,7 +267,12 @@ const Header = ({ onSectionChange }) => {
                   color: "white",
                   padding: "1px 5px 2px",
                 }}
-                onClick={() => handleSectionClick("contacto")}
+                onClick={() => {
+                  handleSectionClick("contacto");
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }
+
               >
                 Contacto
               </Nav.Link>

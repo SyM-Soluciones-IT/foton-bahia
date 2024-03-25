@@ -1,17 +1,15 @@
-// producto.model.js
+// usado.model.js
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const productoSchema = new Schema({
+const usadoSchema = new Schema({
     name: { type: String, required: true },
     description: { type: String },
     image: { type: String },
     category: { type: String },
-    specs: { type: String },
-    datasheet : { type: String },
+    year: { type: String }
 });
 
+const Usado = mongoose.model('Usado', usadoSchema);
 
-const Producto = mongoose.model('Producto', productoSchema);
-
-module.exports = Producto;
+module.exports = Usado;
