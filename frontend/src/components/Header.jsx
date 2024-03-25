@@ -146,8 +146,7 @@ const Header = ({ onSectionChange }) => {
                   backgroundColor:
                     selectedSection === "inicio" ? "#ca213b" : "black",
                   color: "white",
-                  padding: "15px",
-                  borderRadius: "15px",
+                  padding: "1px 5px 2px",
                 }}
                 onClick={() => {
                   handleSectionClick("inicio");
@@ -159,7 +158,7 @@ const Header = ({ onSectionChange }) => {
               </Nav.Link>
               <div className="vehiculos-dropdown-container d-lg-none">
                 <div
-                  className="nav-link dropdown-toggle custom-button"
+                  className="nav-link dropdown-toggle custom-button vehiculos-dropdown"
                   onClick={handleCategoryClick}
                   style={{ cursor: "pointer", width: "fit-content", padding: "15px", borderRadius: "15px"}}
                 >
@@ -178,8 +177,7 @@ const Header = ({ onSectionChange }) => {
                               ? "#ca213b"
                               : "black",
                           color: "white",
-                          padding: "15px",
-                  borderRadius: "15px",
+                          padding: "1px 5px 2px",
                         }}
                         onClick={() => {
                           handleSectionClick(categoria.name);
@@ -210,8 +208,7 @@ const Header = ({ onSectionChange }) => {
                           ? "#ca213b"
                           : "black",
                       color: "white",
-                      padding: "15px",
-                  borderRadius: "15px",
+                      padding: "1px 5px 2px",
                       border: "transparent",
                     }}
                     onClick={() => {
@@ -231,8 +228,7 @@ const Header = ({ onSectionChange }) => {
                   backgroundColor:
                     selectedSection === "repuestos" ? "#ca213b" : "black",
                   color: "white",
-                  padding: "15px",
-                  borderRadius: "15px",
+                  padding: "1px 5px 2px",
                 }}
                 onClick={() => {
                   handleSectionClick("repuestos");
@@ -250,8 +246,7 @@ const Header = ({ onSectionChange }) => {
                   backgroundColor:
                     selectedSection === "contacto" ? "#ca213b" : "black",
                   color: "white",
-                  padding: "15px",
-                  borderRadius: "15px",
+                  padding: "1px 5px 2px",
                 }}
                 onClick={() => handleSectionClick("contacto")}
               >
@@ -264,8 +259,7 @@ const Header = ({ onSectionChange }) => {
                   backgroundColor:
                     selectedSection === "nosotros" ? "#ca213b" : "black",
                   color: "white",
-                  padding: "15px",
-                  borderRadius: "15px",
+                  padding: "1px 5px 2px",
                 }}
                 onClick={() => {
                   handleSectionClick("nosotros");
