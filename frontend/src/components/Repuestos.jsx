@@ -21,7 +21,7 @@ const RepuestosList = () => {
 
   return (
     <Container>
-      <h2 className='principal-titulo'>Repuestos</h2>
+      <h2 className='principal-titulo-home'>Repuestos</h2>
       <ListGroup>
         {repuestos.map((repuesto) => (
           <ListGroup.Item key={repuesto._id}>

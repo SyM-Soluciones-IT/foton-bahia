@@ -32,6 +32,7 @@ h1{
   margin-right: 0px;
   font-size: 1.2em;
   font-weight: bold;
+  padding: 10px 15px!important;
 }
 
 .nav-right{
@@ -95,7 +96,7 @@ h1{
   .nav-link:hover{
     color: white !important;
     background-color: #ed4234 !important;
-    /* padding: 10px 15px!important; */
+    
   }
   .navbar-nav .dropdown-menu{
     position: static;
@@ -105,7 +106,6 @@ h1{
     margin-top: 0!important; /* Elimina el margen en pantallas grandes */
   }
   
-
   .dropdown-item:hover{
     color: white !important;
     background-color: #ed4234 !important;
@@ -114,23 +114,12 @@ h1{
     margin-top: 0;
   }
 
-  .mobile-navbar .nav-link {
-    margin-right: 5px;
+  .dropdown-toggle{
+    padding: 10px !important;
   }
-
-  .mobile-navbar .nav-link:nth-child(1) {
-    margin-right: 0px;
+  
+  .dropdown-toggle::after{
+    font-size: x-large !important;
+    vertical-align: middle !important;
   }
-
-  .nav-right{
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center;
-    position: relative !important;
-    top: 0px !important;
-    right: 0px !important;
-    margin-top: 0px !important;
-  }
-
 }
