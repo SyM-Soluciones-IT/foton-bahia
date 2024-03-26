@@ -1,0 +1,16 @@
+.col{
+  padding: 0;
+}
+
+.tarjeta{
+  width: 100% !important;
+  height: 100% !important;
+  border: none;
+  background-color: rgb(202, 33, 59);
+  color: white;
+  border-radius: 0;
+}
+
+img{
+  height: 100%;
+}

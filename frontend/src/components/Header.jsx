@@ -125,13 +125,12 @@ const Header = ({ onSectionChange }) => {
 
   return (
     <header>
-      <div className="d-flex justify-content-between header-logo align-items-center">
+      <div className="d-flex flex-row justify-content-between header-logo align-items-center">
         <Link to="/">
           <img src={logoFoton} alt="Logo Foton" width={150} />
         </Link>
-        {/* <h1>FOTON BAHIA</h1> */}
-        {/* <h1>CONCESIONARIO OFICIAL</h1> */}
-        <img src={logoBahiaMobility} alt="Logo Bahia Mobility" width={80} />
+        <h1>CONCESIONARIO OFICIAL</h1>
+        <img className="logo-bahia" src={logoBahiaMobility} alt="Logo Bahia Mobility" width={150} />
       </div>
       <div className="m-0 p-0 ">
         <Navbar

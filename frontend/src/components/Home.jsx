@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div>
       <section className="principal">
-        <h2 className="principal-titulo-home">Concesionario Oficial Foton en Bahia Blanca y la zona</h2>
+        <h2 className="principal-titulo-home">Foton en Bahia Blanca y la zona</h2>
         {/* <h2>FOTON BAHIA</h2> */}
         <div className='container'>
           <p className="principal-texto-home">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate in veniam nam repellendus expedita facilis autem! Quas aperiam neque exercitationem! Libero maxime magnam repellendus assumenda aliquam blanditiis provident ullam eaque?</p>

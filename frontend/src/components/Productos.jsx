@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { Navbar, Nav, Modal, Button, Carousel } from "react-bootstrap"; // Asegúrate de importar Modal y Button de react-bootstrap
+import { Navbar, Nav, Modal, Button, Carousel } from "react-bootstrap";
 import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import "./Productos.css";
@@ -12,6 +12,8 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(6); // Número de productos por página
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -19,15 +21,19 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
     obtenerCategorias();
     if (categoria) {
       getProductos(categoria);
+      setTimeout(() => {
+        resetPagination(); 
+      }, 100) 
     } else {
       setProductos([]);
     }
     updateSelectedSection();
-  }, [categoria, location]); // Incluir location en las dependencias
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoria, location]);
 
   const updateSelectedSection = () => {
     const pathname = decodeURIComponent(location.pathname);
-    const categoriaName = pathname.split("/")[2]; // Obtener la categoría de la URL
+    const categoriaName = pathname.split("/")[2];
     onSectionChange(categoriaName);
   };
 
@@ -79,8 +85,19 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
     }
   };
 
+  // Calcular índices de los productos para la página actual
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = productos.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  // Cambiar página
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Resetear la paginación
+  const resetPagination = () => setCurrentPage(1);
+
   return (
-    <div className="container contenedor">
+    <div className="container contenedor text-center d-flex flex-column align-items-center">
       <h2 className="principal-titulo">{categoria}</h2>
       <div
         className="container-categorias"
@@ -89,10 +106,9 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
         <h3 className="text-center mt-4 mb-3">
           Conoce todos nuestros vehículos
         </h3>
-        {/* Navbar para pantallas móviles */}
         <Navbar
           expand="lg"
-          className="nav-dropdown-mobile" // Agrega la clase para estilos móviles
+          className="nav-dropdown-mobile"
           style={{
             backgroundColor: "gray",
             color: "white",
@@ -127,7 +143,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
         </Navbar>
       </div>
       <div className="row">
-        {productos.map((producto) => (
+        {currentProducts.map((producto) => (
           <div key={producto._id} className="col-md-4 mb-4">
             <div
               className="card text-center border-black"
@@ -136,14 +152,22 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
                 marginTop: "10px",
               }}
             >
-              <Carousel interval={null} controls={producto.image.length > 1 || producto.video.length > 0}>
+              <Carousel
+                interval={null}
+                controls={
+                  producto.image.length > 1 || producto.video.length > 0
+                }
+              >
                 {/* Renderizar imágenes */}
                 {producto.image.map((image, index) => (
                   <Carousel.Item key={index}>
                     <img
                       className="d-block w-100"
                       height="290"
-                      style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px"}}
+                      style={{
+                        borderTopLeftRadius: "10px",
+                        borderTopRightRadius: "10px",
+                      }}
                       src={image}
                       alt={`Slide ${index}`}
                     />
@@ -152,7 +176,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
                 {/* Condición para renderizar videos solo si existe al menos uno */}
                 {producto.video.length > 0 &&
                   producto.video.map((video, index) => (
-                    <Carousel.Item key={index} >
+                    <Carousel.Item key={index}>
                       <iframe
                         width="100%"
                         height="290"
@@ -160,31 +184,40 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
                         title={`Video ${index}`}
                         allowFullScreen
                         border="transparent"
-                        style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}
+                        style={{
+                          borderTopLeftRadius: "10px",
+                          borderTopRightRadius: "10px",
+                        }}
                       />
                     </Carousel.Item>
                   ))}
               </Carousel>
               <div className="card-body">
                 <h5 className="card-title">{producto.name}</h5>
-                <p className="card-text"  style={{ textAlign: "start"}}> <strong>Motor: </strong>{producto.engine}</p>
-                <p className="card-text"  style={{ textAlign: "start"}}>
+                <p className="card-text" style={{ textAlign: "start" }}>
+                  {" "}
+                  <strong>Motor: </strong>
+                  {producto.engine}
+                </p>
+                <p className="card-text" style={{ textAlign: "start" }}>
                   <strong>Potencia:</strong> {producto.power}
                 </p>
-                <p className="card-text"  style={{ textAlign: "start"}}>
+                <p className="card-text" style={{ textAlign: "start" }}>
                   <strong>Transmisión:</strong> {producto.gearbox}
                 </p>
-                <p className="card-text"  style={{ textAlign: "start"}}>
+                <p className="card-text" style={{ textAlign: "start" }}>
                   <strong>PBT:</strong> {producto.load}
                 </p>
-                <a
-                  href={producto.datasheet}
-                  target="_self"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary"
-                >
-                  Descargar ficha técnica
-                </a>
+                {producto.datasheet && producto.datasheet !== "" && (
+                  <a
+                    href={producto.datasheet}
+                    target="_self"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                  >
+                    Descargar ficha técnica
+                  </a>
+                )}
                 <button
                   className="btn btn-primary"
                   onClick={() => handleCotizarClick(producto)}
@@ -196,6 +229,23 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
           </div>
         ))}
       </div>
+      {/* Controles de paginación */}
+      <nav>
+        <ul className="pagination justify-content-center">
+          {Array.from({ length: Math.ceil(productos.length / productsPerPage) }, (_, i) => (
+            <li key={i + 1} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
+              <button onClick={() => {
+                  paginate(i + 1);
+                  setTimeout(() => {
+                    window.scrollTo(0, 0);
+                  } , 100);
+                }} className="page-link">
+                {i + 1}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
       {/* Modal aquí */}
       {showModal && (
         <Modal show={showModal} onHide={handleCloseModal}>
