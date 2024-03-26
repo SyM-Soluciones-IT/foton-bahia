@@ -28,7 +28,6 @@ const ClientesList = () => {
         duration={20}
         pauseOnHover={true}
         blurBorders={false}
-        blurBoderColor={'#fff'}
         className="centered-slider"
         infinite={true}
       >

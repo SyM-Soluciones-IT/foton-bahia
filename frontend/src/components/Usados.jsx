@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Navbar, Nav, Modal, Button } from "react-bootstrap"; // Asegúrate de importar Modal y Button de react-bootstrap
-import { useParams, useNavigate, Link, useLocation  } from "react-router-dom";
+import { Modal, Button } from "react-bootstrap"; // Asegúrate de importar Modal y Button de react-bootstrap
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Usados.css";
 
-const Usados = ({ onSectionChange, selectedSection}) => {
+const Usados = ({ onSectionChange, selectedSection }) => {
   const [usados, setUsados] = useState([]);
   const [selectedUsado, setSelectedUsado] = useState(null);
   const [isNavExpanded, setIsNavExpanded] = useState(false);
@@ -14,7 +14,7 @@ const Usados = ({ onSectionChange, selectedSection}) => {
 
   useEffect(() => {
     getUsados();
-  }, [ location]); // Incluir location en las dependencias
+  }, [location]); // Incluir location en las dependencias
 
   const handleToggleClick = () => {
     setIsNavExpanded(!isNavExpanded);
@@ -49,11 +49,31 @@ const Usados = ({ onSectionChange, selectedSection}) => {
     }
   };
 
-
   return (
-    <div className="container contenedor">
-      <h2 className="principal-titulo">Usados</h2>
-      <div className="row">
+    <div className="container contenedor d-flex flex-column align-items-center">
+      <h2 className="principal-titulo-usados">Usados</h2>
+      <div className="separador">
+        <p>
+          En nuestra búsqueda por ofrecerte solo lo mejor, cada vehículo en
+          nuestra sección de usados ha sido sometido a rigurosos controles de
+          calidad y mantenimiento. Desde camiones ligeros hasta pesados, cada
+          unidad ha sido escogida meticulosamente para garantizar su calidad,
+          desempeño y confiabilidad. 
+          </p>
+          <p>Nuestro equipo de expertos realiza
+          exhaustivas inspecciones y pruebas para asegurarse de que cada vehículo
+          cumpla con nuestros exigentes estándares. Nos comprometemos a ofrecerte
+          una amplia variedad de opciones de alta calidad que se adapten a tus
+          necesidades y presupuesto. Ya sea que estés buscando un camión para tu
+          negocio o para tu uso personal, puedes confiar en que encontrarás solo
+          los mejores vehículos en nuestra sección de usados. Además, nuestro
+          equipo de ventas está aquí para brindarte toda la asistencia y
+          orientación que necesites para tomar la mejor decisión. Explora nuestra
+          selección de camiones usados hoy mismo y descubre la calidad y
+          confiabilidad que solo nuestra concesionaria puede ofrecerte.
+        </p>
+      </div>
+      <div className="row d-flex justify-content-center">
         {usados.map((usado) => (
           <div key={usado._id} className="col-md-4 mb-4">
             <div
@@ -98,13 +118,12 @@ const Usados = ({ onSectionChange, selectedSection}) => {
           <Modal.Body>
             {selectedUsado && (
               <p>
-                Elija una opción para cotizar el usado{" "}
-                {selectedUsado.name}:
+                Elija una opción para cotizar el usado {selectedUsado.name}:
               </p>
             )}
             <Button
               variant="primary"
-              style={{ marginRight: "5px" ,marginBottom:'5px'}}
+              style={{ marginRight: "5px", marginBottom: "5px" }}
               onClick={() => {
                 const mensaje = encodeURIComponent(
                   `Hola, quiero cotizar el usado ${selectedUsado.name}`
@@ -116,7 +135,7 @@ const Usados = ({ onSectionChange, selectedSection}) => {
             </Button>{" "}
             <Button
               variant="primary"
-              style={{ marginRight: "5px" ,marginBottom:'5px'}}
+              style={{ marginRight: "5px", marginBottom: "5px" }}
               onClick={() => {
                 navigate(
                   `/contacto?asunto=Cotizacion ${encodeURIComponent(

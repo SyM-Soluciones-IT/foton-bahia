@@ -4,11 +4,13 @@ const Schema = mongoose.Schema;
 
 const productoSchema = new Schema({
     name: { type: String, required: true },
-    description: { type: String },
-    image: { type: String },
+    engine: { type: String },
     category: { type: String },
-    specs: { type: String },
-    datasheet : { type: String },
+    power : { type: String },
+    gearbox : { type: String },
+    load: { type: String },
+    image: { type: Array },
+    video: { type: Array },
 });
 
 

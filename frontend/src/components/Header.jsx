@@ -117,6 +117,12 @@ const Header = ({ onSectionChange }) => {
     setShowModal(false);
   };
 
+  const scrollToTop = () => {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 100); // Retraso de 100 milisegundos
+  }
+
   return (
     <header>
       <div className="d-flex justify-content-between header-logo align-items-center">
@@ -152,7 +158,7 @@ const Header = ({ onSectionChange }) => {
                 }}
                 onClick={() => {
                   handleSectionClick("inicio");
-                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  scrollToTop();
                   } 
                 }
               >
@@ -184,7 +190,7 @@ const Header = ({ onSectionChange }) => {
                         onClick={() => {
                           handleSectionClick(categoria.name);
                           handleCategoryClick();
-                          window.scrollTo({ top: 0, behavior: "smooth" });
+                          scrollToTop();
                         }}
                       >
                         {categoria.name}
@@ -216,7 +222,7 @@ const Header = ({ onSectionChange }) => {
                     onClick={() => {
                       handleSectionClick(categoria.name);
                       handleCategoryClick();
-                      window.scrollTo({ top: 0, behavior: "smooth" });
+                      scrollToTop();
                     }}
                   >
                     {categoria.name}
@@ -234,7 +240,7 @@ const Header = ({ onSectionChange }) => {
                 }}
                 onClick={() => {
                   handleSectionClick("repuestos");
-                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  scrollToTop();
                   }
                 }
               >
@@ -252,7 +258,7 @@ const Header = ({ onSectionChange }) => {
                 }}
                 onClick={() => {
                   handleSectionClick("usados");
-                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  scrollToTop();
                   } 
                 }
               >
@@ -269,7 +275,7 @@ const Header = ({ onSectionChange }) => {
                 }}
                 onClick={() => {
                   handleSectionClick("contacto");
-                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  scrollToTop();
                   }
                 }
 
@@ -287,7 +293,7 @@ const Header = ({ onSectionChange }) => {
                 }}
                 onClick={() => {
                   handleSectionClick("nosotros");
-                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  scrollToTop();
                   }
                 }
               >

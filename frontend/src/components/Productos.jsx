@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Navbar, Nav, Modal, Button } from "react-bootstrap"; // Asegúrate de importar Modal y Button de react-bootstrap
-import { useParams, useNavigate, Link, useLocation  } from "react-router-dom";
+import { Navbar, Nav, Modal, Button, Carousel } from "react-bootstrap"; // Asegúrate de importar Modal y Button de react-bootstrap
+import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import "./Productos.css";
 
-const ProductosList = ({ onSectionChange, selectedSection}) => {
+const ProductosList = ({ onSectionChange, selectedSection }) => {
   const [categorias, setCategorias] = useState([]);
   const [productos, setProductos] = useState([]);
   const { categoria } = useParams();
@@ -86,7 +86,7 @@ const ProductosList = ({ onSectionChange, selectedSection}) => {
         className="container-categorias"
         style={{ backgroundColor: "gray", color: "white" }}
       >
-        <h3 className="text-center mt-4 mb-3" >
+        <h3 className="text-center mt-4 mb-3">
           Conoce todos nuestros vehículos
         </h3>
         {/* Navbar para pantallas móviles */}
@@ -112,9 +112,7 @@ const ProductosList = ({ onSectionChange, selectedSection}) => {
                   to={`/productos/${categoria.name}`}
                   style={{
                     backgroundColor:
-                      selectedSection === categoria.name
-                        ? "#ca213b"
-                        : "gray",
+                      selectedSection === categoria.name ? "#ca213b" : "gray",
                     color: "white",
                   }}
                   onClick={() => {
@@ -135,23 +133,49 @@ const ProductosList = ({ onSectionChange, selectedSection}) => {
               className="card text-center border-black"
               style={{
                 borderRadius: "10px",
-                minHeight: "350px",
                 marginTop: "10px",
               }}
             >
-              <img
-                className="card-img-top"
-                src={producto.image}
-                alt={producto.name}
-              />
+              <Carousel interval={null} controls={producto.image.length > 1 || producto.video.length > 0}>
+                {/* Renderizar imágenes */}
+                {producto.image.map((image, index) => (
+                  <Carousel.Item key={index}>
+                    <img
+                      className="d-block w-100"
+                      height="290"
+                      style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px"}}
+                      src={image}
+                      alt={`Slide ${index}`}
+                    />
+                  </Carousel.Item>
+                ))}
+                {/* Condición para renderizar videos solo si existe al menos uno */}
+                {producto.video.length > 0 &&
+                  producto.video.map((video, index) => (
+                    <Carousel.Item key={index} >
+                      <iframe
+                        width="100%"
+                        height="290"
+                        src={video}
+                        title={`Video ${index}`}
+                        allowFullScreen
+                        border="transparent"
+                        style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}
+                      />
+                    </Carousel.Item>
+                  ))}
+              </Carousel>
               <div className="card-body">
                 <h5 className="card-title">{producto.name}</h5>
-                <p className="card-text">{producto.description}</p>
-                <p className="card-text">
-                  <strong>Category:</strong> {categoria || "No especificada"}
+                <p className="card-text"  style={{ textAlign: "start"}}> <strong>Motor: </strong>{producto.engine}</p>
+                <p className="card-text"  style={{ textAlign: "start"}}>
+                  <strong>Potencia:</strong> {producto.power}
                 </p>
-                <p className="card-text">
-                  <strong>Specs:</strong> {producto.specs}
+                <p className="card-text"  style={{ textAlign: "start"}}>
+                  <strong>Transmisión:</strong> {producto.gearbox}
+                </p>
+                <p className="card-text"  style={{ textAlign: "start"}}>
+                  <strong>PBT:</strong> {producto.load}
                 </p>
                 <a
                   href={producto.datasheet}
@@ -181,13 +205,13 @@ const ProductosList = ({ onSectionChange, selectedSection}) => {
           <Modal.Body>
             {selectedProduct && (
               <p>
-                Elija una opción para cotizar el producto{" "}
-                {selectedProduct.name}:
+                Elija una opción para cotizar el producto {selectedProduct.name}
+                :
               </p>
             )}
             <Button
               variant="primary"
-              style={{ marginRight: "5px" ,marginBottom:'5px'}}
+              style={{ marginRight: "5px", marginBottom: "5px" }}
               onClick={() => {
                 const mensaje = encodeURIComponent(
                   `Hola, quiero cotizar el producto ${selectedProduct.name}`
@@ -199,7 +223,7 @@ const ProductosList = ({ onSectionChange, selectedSection}) => {
             </Button>{" "}
             <Button
               variant="primary"
-              style={{ marginRight: "5px" ,marginBottom:'5px'}}
+              style={{ marginRight: "5px", marginBottom: "5px" }}
               onClick={() => {
                 navigate(
                   `/contacto?asunto=Cotizacion ${encodeURIComponent(
