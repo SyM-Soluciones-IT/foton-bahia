@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
-import { Navbar, Nav, Modal, Button, Carousel } from "react-bootstrap";
+import { Navbar, Nav, Modal, Button, Carousel, Spinner } from "react-bootstrap";
 import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
-import { RxHamburgerMenu } from "react-icons/rx";
 import "./Productos.css";
 
 const ProductosList = ({ onSectionChange, selectedSection }) => {
@@ -14,21 +13,20 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(6); // Número de productos por página
+  const [loading, setLoading] = useState(true); // Estado para controlar la carga de productos
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     obtenerCategorias();
     if (categoria) {
+      setLoading(true);
       getProductos(categoria);
-      setTimeout(() => {
-        resetPagination(); 
-      }, 100) 
+      resetPagination(); 
     } else {
       setProductos([]);
     }
     updateSelectedSection();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoria, location]);
 
   const updateSelectedSection = () => {
@@ -71,6 +69,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
   };
 
   const getProductos = async (categoria) => {
+    setProductos([]);
     try {
       const response = await axios.get(
         `http://localhost:5000/api/productos/${categoria}`
@@ -82,6 +81,8 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
       }
     } catch (error) {
       console.error("Error fetching productos:", error);
+    } finally {
+      setLoading(false); // Desactivar la carga después de que los productos estén cargados
     }
   };
 
@@ -98,7 +99,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
 
   return (
     <div className="container contenedor text-center d-flex flex-column align-items-center">
-      <h2 className="principal-titulo">{categoria}</h2>
+      <h2 className="principal-titulo-home">{categoria}</h2>
       <div
         className="container-categorias"
         style={{ backgroundColor: "gray", color: "white" }}
@@ -142,13 +143,22 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
           </Navbar.Collapse>
         </Navbar>
       </div>
+      {/* Mostrar spinner de carga mientras se cargan los productos */}
+      {loading && (
+        <div className="spinner">
+          <Spinner animation="border" role="status">
+            <span className="sr-only"></span>
+          </Spinner>
+        </div>
+      )}
+      {/* Renderizar productos solo cuando no se están cargando */}
+      {!loading && (
       <div className="row">
         {currentProducts.map((producto) => (
           <div key={producto._id} className="col-md-4 mb-4">
             <div
               className="card text-center border-black"
               style={{
-                borderRadius: "10px",
                 marginTop: "10px",
               }}
             >
@@ -162,7 +172,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
                 {producto.image.map((image, index) => (
                   <Carousel.Item key={index}>
                     <img
-                      className="d-block w-100"
+                      className="d-block w-100 image-card"
                       height="290"
                       style={{
                         borderTopLeftRadius: "10px",
@@ -229,6 +239,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
           </div>
         ))}
       </div>
+      )}
       {/* Controles de paginación */}
       <nav>
         <ul className="pagination justify-content-center">

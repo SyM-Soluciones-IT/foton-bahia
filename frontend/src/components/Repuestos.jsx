@@ -11,7 +11,7 @@ const PostVenta = () => {
     <Container className="d-flex flex-column align-items-center">
       <Row className="my-5">
         <Col>
-          <h1 className="text-center">Servicio Post Venta</h1>
+        <h2 className="principal-titulo-home mt-0">Servicio Post Venta</h2>
           <p className="text-center">
             El equipo de Bahia Mobility, se enorgullece de ofrecer soluciones
             especializadas y eficientes a tus necesidades vehiculares. Nuestro
@@ -70,7 +70,7 @@ const PostVenta = () => {
               <Card.Text>
                 Cuidados preventivos para mantener tu vehículo en excelentes condiciones por mas tiempo
               </Card.Text>
-              <a href="https://internacionalvehiculos.com/es/chasis/mantenimiento/cuales-son-los-mantenimientos-preventivos-de-los-camiones-foton/" className="btn btn-primary">Más Información</a>
+              <a href="https://internacionalvehiculos.com/es/chasis/mantenimiento/cuales-son-los-mantenimientos-preventivos-de-los-camiones-foton/" className="btn btn-primary" target="_blank" rel="noopener noreferrer" >Más Información</a>
             </Card.Body>
           </Card>
         </Col>

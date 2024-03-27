@@ -3,7 +3,7 @@
   margin-right: 15% !important;
 }
 
-.principal-titulo-nosotros, .principal-titulo-2{
+.principal-titulo-2{
   margin-top: 1em !important;
   text-align: center !important;
   font-size: 1.5em !important;
@@ -39,9 +39,6 @@
     justify-content: center !important;
     align-items: center !important;
     flex-wrap: wrap !important;
-  }
-  .principal-titulo-nosotros{
-    font-size: 2.2em !important;
   }
   .principal-texto{
     text-align: justify !important;

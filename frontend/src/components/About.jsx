@@ -5,7 +5,7 @@ import "./About.css"; // Archivo CSS para los estilos específicos del component
 const About = () => {
   return (
     <section id="about" >
-      <h2 className="principal-titulo-nosotros" >Sobre Nosotros</h2>
+      <h2 className="principal-titulo-home" >Sobre Nosotros</h2>
       <div className="contenedor-uno">
         <p className="principal-texto">
         "Bahia Mobility es líder en soluciones de movilidad urbana sostenible. Nuestra empresa está comprometida con la innovación y la excelencia, ofreciendo productos y servicios de calidad que promueven un futuro más limpio y eficiente. Explora nuestra amplia gama de soluciones y descubre cómo estamos transformando la manera en que nos movemos en las ciudades. Desde vehículos eléctricos hasta sistemas de transporte inteligente, en Bahia Mobility estamos dedicados a crear un entorno urbano más accesible, seguro y respetuoso con el medio ambiente. Únete a nosotros en nuestro compromiso con la movilidad sostenible y haz parte del cambio hacia un futuro mejor."
