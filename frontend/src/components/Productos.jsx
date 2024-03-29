@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Navbar, Nav, Modal, Button, Carousel, Spinner } from "react-bootstrap";
 import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
@@ -22,7 +22,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
     if (categoria) {
       setLoading(true);
       getProductos(categoria);
-      resetPagination(); 
+      resetPagination();
     } else {
       setProductos([]);
     }
@@ -89,7 +89,10 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
   // Calcular índices de los productos para la página actual
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = productos.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = productos.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   // Cambiar página
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -102,7 +105,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
       <h2 className="principal-titulo-home">{categoria}</h2>
       <div
         className="container-categorias"
-        style={{ backgroundColor: "gray", color: "white" }}
+        style={{ backgroundColor: "#5d5d5d", color: "white", width: "100vw" }}
       >
         <h3 className="text-center mt-4 mb-3">
           Conoce todos nuestros vehículos
@@ -111,7 +114,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
           expand="lg"
           className="nav-dropdown-mobile"
           style={{
-            backgroundColor: "gray",
+            backgroundColor: "#5d5d5d",
             color: "white",
             width: "100%",
             border: "transparent",
@@ -120,17 +123,25 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
           onToggle={handleToggleClick}
         >
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Collapse
+            id="responsive-navbar-nav"
+            className="nav-categorias"
+          >
             <Nav className="mr-auto navbar-categorias">
               {categorias.map((categoria) => (
                 <Nav.Link
+                  className="nav-link-categorias"
                   key={categoria._id}
                   as={Link}
-                  to={`/productos/${categoria.name}`}
+                  to={`/productos/${categoria.name} `}
                   style={{
                     backgroundColor:
-                      selectedSection === categoria.name ? "#ca213b" : "gray",
+                      selectedSection === categoria.name
+                        ? "#ca213b"
+                        : "#5d5d5d",
                     color: "white",
+                    fontWeight: "bold",
+                    fontSize: "1.2em",               
                   }}
                   onClick={() => {
                     handleSectionClick(categoria.name);
@@ -138,6 +149,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
                 >
                   {categoria.name}
                 </Nav.Link>
+                
               ))}
             </Nav>
           </Navbar.Collapse>
@@ -153,108 +165,117 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
       )}
       {/* Renderizar productos solo cuando no se están cargando */}
       {!loading && (
-      <div className="row">
-        {currentProducts.map((producto) => (
-          <div key={producto._id} className="col-md-4 mb-4">
-            <div
-              className="card text-center border-black"
-              style={{
-                marginTop: "10px",
-              }}
-            >
-              <Carousel
-                interval={null}
-                controls={
-                  producto.image.length > 1 || producto.video.length > 0
-                }
+        <div className="row">
+          {currentProducts.map((producto) => (
+            <div key={producto._id} className="col-md-4 mb-4">
+              <div
+                className="card text-center border-black"
+                style={{
+                  marginTop: "10px",
+                }}
               >
-                {/* Renderizar imágenes */}
-                {producto.image.map((image, index) => (
-                  <Carousel.Item key={index}>
-                    <img
-                      className="d-block w-100 image-card"
-                      height="290"
-                      style={{
-                        borderTopLeftRadius: "10px",
-                        borderTopRightRadius: "10px",
-                      }}
-                      src={image}
-                      alt={`Slide ${index}`}
-                    />
-                  </Carousel.Item>
-                ))}
-                {/* Condición para renderizar videos solo si existe al menos uno */}
-                {producto.video.length > 0 &&
-                  producto.video.map((video, index) => (
+                <Carousel
+                  interval={null}
+                  controls={
+                    producto.image.length > 1 || producto.video.length > 0
+                  }
+                >
+                  {/* Renderizar imágenes */}
+                  {producto.image.map((image, index) => (
                     <Carousel.Item key={index}>
-                      <iframe
-                        width="100%"
+                      <img
+                        className="d-block w-100 image-card"
                         height="290"
-                        src={video}
-                        title={`Video ${index}`}
-                        allowFullScreen
-                        border="transparent"
                         style={{
                           borderTopLeftRadius: "10px",
                           borderTopRightRadius: "10px",
                         }}
+                        src={image}
+                        alt={`Slide ${index}`}
                       />
                     </Carousel.Item>
                   ))}
-              </Carousel>
-              <div className="card-body">
-                <h5 className="card-title">{producto.name}</h5>
-                <p className="card-text" style={{ textAlign: "start" }}>
-                  {" "}
-                  <strong>Motor: </strong>
-                  {producto.engine}
-                </p>
-                <p className="card-text" style={{ textAlign: "start" }}>
-                  <strong>Potencia:</strong> {producto.power}
-                </p>
-                <p className="card-text" style={{ textAlign: "start" }}>
-                  <strong>Transmisión:</strong> {producto.gearbox}
-                </p>
-                <p className="card-text" style={{ textAlign: "start" }}>
-                  <strong>PBT:</strong> {producto.load}
-                </p>
-                {producto.datasheet && producto.datasheet !== "" && (
-                  <a
-                    href={producto.datasheet}
-                    target="_self"
-                    rel="noopener noreferrer"
+                  {/* Condición para renderizar videos solo si existe al menos uno */}
+                  {producto.video.length > 0 &&
+                    producto.video.map((video, index) => (
+                      <Carousel.Item key={index}>
+                        <iframe
+                          width="100%"
+                          height="290"
+                          src={video}
+                          title={`Video ${index}`}
+                          allowFullScreen
+                          border="transparent"
+                          style={{
+                            borderTopLeftRadius: "10px",
+                            borderTopRightRadius: "10px",
+                          }}
+                        />
+                      </Carousel.Item>
+                    ))}
+                </Carousel>
+                <div className="card-body-productos">
+                  <h5 className="card-title">{producto.name}</h5>
+                  <p className="card-text" style={{ textAlign: "start" }}>
+                    {" "}
+                    <strong>Motor: </strong>
+                    {producto.engine}
+                  </p>
+                  <p className="card-text" style={{ textAlign: "start" }}>
+                    <strong>Potencia:</strong> {producto.power}
+                  </p>
+                  <p className="card-text" style={{ textAlign: "start" }}>
+                    <strong>Transmisión:</strong> {producto.gearbox}
+                  </p>
+                  <p className="card-text" style={{ textAlign: "start" }}>
+                    <strong>PBT:</strong> {producto.load}
+                  </p>
+                  {producto.datasheet && producto.datasheet !== "" && (
+                    <a
+                      href={producto.datasheet}
+                      target="_self"
+                      rel="noopener noreferrer"
+                      className="btn btn-primary"
+                    >
+                      Descargar ficha técnica
+                    </a>
+                  )}
+                  <button
                     className="btn btn-primary"
+                    onClick={() => handleCotizarClick(producto)}
                   >
-                    Descargar ficha técnica
-                  </a>
-                )}
-                <button
-                  className="btn btn-primary"
-                  onClick={() => handleCotizarClick(producto)}
-                >
-                  Cotiza aquí
-                </button>
+                    Cotiza aquí
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
       )}
       {/* Controles de paginación */}
       <nav>
         <ul className="pagination justify-content-center">
-          {Array.from({ length: Math.ceil(productos.length / productsPerPage) }, (_, i) => (
-            <li key={i + 1} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
-              <button onClick={() => {
-                  paginate(i + 1);
-                  setTimeout(() => {
-                    window.scrollTo(0, 0);
-                  } , 100);
-                }} className="page-link">
-                {i + 1}
-              </button>
-            </li>
-          ))}
+          {Array.from(
+            { length: Math.ceil(productos.length / productsPerPage) },
+            (_, i) => (
+              <li
+                key={i + 1}
+                className={`page-item ${currentPage === i + 1 ? "active" : ""}`}
+              >
+                <button
+                  onClick={() => {
+                    paginate(i + 1);
+                    setTimeout(() => {
+                      window.scrollTo(0, 0);
+                    }, 100);
+                  }}
+                  className="page-link"
+                >
+                  {i + 1}
+                </button>
+              </li>
+            )
+          )}
         </ul>
       </nav>
       {/* Modal aquí */}

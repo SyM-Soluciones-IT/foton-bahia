@@ -9,6 +9,9 @@
   background-color: rgb(202, 33, 59);
   color: white;
   border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 img{

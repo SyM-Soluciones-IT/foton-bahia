@@ -37,10 +37,10 @@ const PostVenta = () => {
       <Row>
         <Col>
           <Card className="tarjeta">
-          <Card.Img variant="top" src="https://i.ibb.co/ZNYYxQb/images.jpg" />
-            <Card.Body className="text-center">
-              <Card.Title>Garantía</Card.Title>
-              <Card.Text>
+          <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold"}}>Garantía</Card.Title>
+            <Card.Body className="text-center" >
+              <Card.Img variant="bottom" style={{ width: "300px", height: "350px" }} src="https://i.ibb.co/ZNYYxQb/images.jpg" />
+              <Card.Text style={{marginTop: ".7em", minHeight: "100px", display: "flex", alignItems: "center"}}>
                 Nuestros vehiculos cuentan con una garantia de 100.000kms o 3
                 años lo que suceda primero.
               </Card.Text>
@@ -49,10 +49,10 @@ const PostVenta = () => {
         </Col>
         <Col>
         <Card className="tarjeta">
-            <Card.Img variant="top" src="https://i.ibb.co/Nym7Cbv/bahia-mobility-repuestos.jpg" />
+          <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold"}}>Repuestos</Card.Title>
             <Card.Body className="text-center">
-              <Card.Title>Repuestos</Card.Title>
-              <Card.Text>
+              <Card.Img variant="bottom" style={{ width: "300px", height: "350px" }} src="https://i.ibb.co/Nym7Cbv/bahia-mobility-repuestos.jpg" />
+              <Card.Text style={{marginTop: ".7em", minHeight: "100px", display: "flex", alignItems: "center"}}>
                 En Bahia Mobility todos los repuestos son originales,
                 garantizando asi que tu vehículo siempre este en perfecto
                 estado.
@@ -64,10 +64,10 @@ const PostVenta = () => {
       <Row>
         <Col>
         <Card className="tarjeta">
-            <Card.Img variant="top" src="https://i.ibb.co/q9gGhwV/POST.jpg" />
+            <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold", marginTop: "1em"}}>Cuidados Básicos de tu Unidad</Card.Title>
             <Card.Body className="text-center">
-              <Card.Title>Cuidados básicos de tu unidad</Card.Title>
-              <Card.Text>
+              <Card.Img variant="bottom" style={{ width: "300px", height: "350px" }} src="https://i.ibb.co/q9gGhwV/POST.jpg" />
+              <Card.Text style={{marginTop: ".7em",  minHeight: "100px", display: "flex", alignItems: "center"}}>
                 Cuidados preventivos para mantener tu vehículo en excelentes condiciones por mas tiempo
               </Card.Text>
               <a href="https://internacionalvehiculos.com/es/chasis/mantenimiento/cuales-son-los-mantenimientos-preventivos-de-los-camiones-foton/" className="btn btn-primary" target="_blank" rel="noopener noreferrer" >Más Información</a>
@@ -76,10 +76,10 @@ const PostVenta = () => {
         </Col>
         <Col>
         <Card className="tarjeta">
-            <Card.Img variant="top" src="https://i.ibb.co/mzVTrnQ/2024-03-13.jpg" />
+            <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold", marginTop: "1em"}}>Reparaciones</Card.Title>
             <Card.Body className="text-center">
-              <Card.Title>Reparaciones</Card.Title>
-              <Card.Text>
+              <Card.Img variant="bottom" style={{ width: "300px",height: "350px" }} src="https://i.ibb.co/mzVTrnQ/2024-03-13.jpg" />
+              <Card.Text style={{marginTop: ".7em",  minHeight: "100px", display: "flex", alignItems: "center"}}>
                 Contamos con un equipo de reparaciones de alta tecnología. Ante
                 cualquier inconveniente no dude en solicitar su turno mediante
                 las siguientes vias de comunicacion
