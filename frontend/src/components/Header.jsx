@@ -243,7 +243,7 @@ const Header = ({ onSectionChange }) => {
                   }
                 }
               >
-                Servicio Post Venta
+                Post Venta
               </Nav.Link>
               <Nav.Link
                 as={Link}

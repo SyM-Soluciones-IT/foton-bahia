@@ -12,15 +12,17 @@
 
 .marca-list {
   display: flex;
+  background-color: #ca173e;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
+  padding: 10px;
 }
 
 .marca-item {
   margin: 10px;
   max-width: 200px;
-  max-height: 220px;
+  max-height: 300px;
   display: flex;
   justify-content: center;
 }
@@ -30,6 +32,7 @@
   height: 220px; /* Altura fija de la tarjeta */
   text-align: center;
   overflow: hidden; /* Oculta el contenido que se desborda */
+  margin: 10px;
 }
 
 .image-card-body {

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Form, Button, Container } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 
-const ContactForm = () => {
+const ContactForm = ({isHome=false}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -35,9 +35,9 @@ const ContactForm = () => {
   };
 
   return (
-    <Container>
-      <h2 className='principal-titulo-home'>Contacto</h2>
-
+    <div >
+      <h2 className={isHome ? "principal-titulo-home" : "principal-titulo-seccion"}>Contacto</h2>
+      <Container>
       <Form onSubmit={handleSubmit} className="mt-4 p-4 border rounded" style={{backgroundColor: "#da1d27"}}>
         <Form.Group controlId="formName">
           <Form.Label style={{color: "white"}}>Name</Form.Label>
@@ -57,7 +57,8 @@ const ContactForm = () => {
         </Form.Group>
         <Button variant="primary" type="submit" className="mt-2">Send</Button>
       </Form>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

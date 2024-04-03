@@ -102,7 +102,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
 
   return (
     <div className="container contenedor text-center d-flex flex-column align-items-center">
-      <h2 className="principal-titulo-home">{categoria}</h2>
+      <h2 className="principal-titulo-seccion">{categoria}</h2>
       <div
         className="container-categorias"
         style={{ backgroundColor: "#5d5d5d", color: "white", width: "100vw" }}
@@ -165,16 +165,17 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
       )}
       {/* Renderizar productos solo cuando no se están cargando */}
       {!loading && (
-        <div className="row">
+        <div className="row" style={{ marginTop: "1em", width: "100%" }}>
           {currentProducts.map((producto) => (
             <div key={producto._id} className="col-md-4 mb-4">
               <div
-                className="card text-center border-black"
+                className="card-productos"
                 style={{
                   marginTop: "10px",
                 }}
               >
                 <Carousel
+                  style={{ borderBottom: "1px solid black" }}
                   interval={null}
                   controls={
                     producto.image.length > 1 || producto.video.length > 0
@@ -187,8 +188,8 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
                         className="d-block w-100 image-card"
                         height="290"
                         style={{
-                          borderTopLeftRadius: "10px",
-                          borderTopRightRadius: "10px",
+                          borderTopLeftRadius: "5px",
+                          borderTopRightRadius: "5px",
                         }}
                         src={image}
                         alt={`Slide ${index}`}
@@ -215,19 +216,19 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
                     ))}
                 </Carousel>
                 <div className="card-body-productos">
-                  <h5 className="card-title">{producto.name}</h5>
-                  <p className="card-text" style={{ textAlign: "start" }}>
+                  <h5 className="card-title" style={{ width: "100%" , fontWeight: "bold", borderBottom: "1px solid black"}}>{producto.name}</h5>
+                  <p className="card-text" style={{ textAlign: "center" }}>
                     {" "}
                     <strong>Motor: </strong>
                     {producto.engine}
                   </p>
-                  <p className="card-text" style={{ textAlign: "start" }}>
+                  <p className="card-text" style={{ textAlign: "center" }}>
                     <strong>Potencia:</strong> {producto.power}
                   </p>
-                  <p className="card-text" style={{ textAlign: "start" }}>
+                  <p className="card-text" style={{ textAlign: "center" }}>
                     <strong>Transmisión:</strong> {producto.gearbox}
                   </p>
-                  <p className="card-text" style={{ textAlign: "start" }}>
+                  <p className="card-text" style={{ textAlign: "center" }}>
                     <strong>PBT:</strong> {producto.load}
                   </p>
                   {producto.datasheet && producto.datasheet !== "" && (
@@ -242,6 +243,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
                   )}
                   <button
                     className="btn btn-primary"
+                    style={{ width: "fit-content" }}
                     onClick={() => handleCotizarClick(producto)}
                   >
                     Cotiza aquí

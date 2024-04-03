@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaAngleUp } from "react-icons/fa6";
 import './ScrollToTopButton.css';
 
 const ScrollToTopButton = ({ smoothScrollingEnabled }) => {
@@ -7,7 +8,7 @@ const ScrollToTopButton = ({ smoothScrollingEnabled }) => {
   useEffect(() => {
     // Función para mostrar u ocultar el botón basado en la posición de desplazamiento
     const toggleVisibility = () => {
-      if (window.scrollY > 300) {
+      if (window.scrollY > 100) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -37,7 +38,7 @@ const ScrollToTopButton = ({ smoothScrollingEnabled }) => {
       className={isVisible ? "scroll-to-top-button show" : "scroll-to-top-button"}
       onClick={scrollToTop}
     >
-      ^
+      <FaAngleUp />
     </div>
   );
 };

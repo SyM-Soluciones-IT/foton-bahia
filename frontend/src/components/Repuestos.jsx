@@ -3,16 +3,16 @@ import { Container, Row, Col, Card, Button, Modal } from "react-bootstrap";
 import { RiWhatsappLine, RiMailLine, RiPhoneLine } from "react-icons/ri";
 import "./Repuestos.css";
 
-const PostVenta = () => {
+const PostVenta = ({isHome=false}) => {
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
   return (
-    <Container className="d-flex flex-column align-items-center">
-      <Row className="my-5">
-        <Col>
-        <h2 className="principal-titulo-home mt-0">Servicio Post Venta</h2>
-          <p className="text-center">
+    <div className="contenedor" style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <h2 className={isHome ? "principal-titulo-home" : "principal-titulo-seccion"}>Post Venta</h2>
+        <div className="intro-repuestos" style={{ width: "80%"}}>
+        
+          <p className="repuestos-texto">
             El equipo de Bahia Mobility, se enorgullece de ofrecer soluciones
             especializadas y eficientes a tus necesidades vehiculares. Nuestro
             personal altamente capacitado y certificado garantiza un servicio de
@@ -22,7 +22,7 @@ const PostVenta = () => {
             stock de repuestos genuinos, asegurando así que cada intervención se
             realice con la calidad y la rapidez que mereces.
           </p>
-          <p className="text-center">
+          <p className="repuestos-texto">
             Entendemos plenamente la importancia de cada minuto en tus
             operaciones, por eso nos comprometemos a minimizar cualquier tiempo
             de inactividad. Nuestra eficiencia se refleja en nuestros tiempos de
@@ -32,10 +32,8 @@ const PostVenta = () => {
             cada paso del camino. Confía en nosotros para mantener tus vehículos
             en óptimas condiciones y maximizar su rendimiento en todo momento.
           </p>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
+        </div>
+      <div className="contenedor-top">
           <Card className="tarjeta">
           <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold"}}>Garantía</Card.Title>
             <Card.Body className="text-center" >
@@ -46,8 +44,6 @@ const PostVenta = () => {
               </Card.Text>
             </Card.Body>
           </Card>
-        </Col>
-        <Col>
         <Card className="tarjeta">
           <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold"}}>Repuestos</Card.Title>
             <Card.Body className="text-center">
@@ -59,10 +55,9 @@ const PostVenta = () => {
               </Card.Text>
             </Card.Body>
           </Card>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
+      </div>
+      <div className="contenedor-top">
+
         <Card className="tarjeta">
             <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold", marginTop: "1em"}}>Cuidados Básicos de tu Unidad</Card.Title>
             <Card.Body className="text-center">
@@ -73,8 +68,6 @@ const PostVenta = () => {
               <a href="https://internacionalvehiculos.com/es/chasis/mantenimiento/cuales-son-los-mantenimientos-preventivos-de-los-camiones-foton/" className="btn btn-primary" target="_blank" rel="noopener noreferrer" >Más Información</a>
             </Card.Body>
           </Card>
-        </Col>
-        <Col>
         <Card className="tarjeta">
             <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold", marginTop: "1em"}}>Reparaciones</Card.Title>
             <Card.Body className="text-center">
@@ -93,8 +86,7 @@ const PostVenta = () => {
               </Button>
             </Card.Body>
           </Card>
-        </Col>
-      </Row>
+      </div>
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Seleccione una opción de contacto</Modal.Title>
@@ -131,7 +123,7 @@ const PostVenta = () => {
           </Button>
         </Modal.Body>
       </Modal>
-    </Container>
+    </div>
   );
 };
 

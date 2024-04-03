@@ -15,6 +15,7 @@ import About from "./components/About";
 import Usados from "./components/Usados";
 import ScrollToTopButton from "./components/ScrollToTopButton"; 
 import WhatsAppButton from './components/WhatsAppButton'; // Importa el componente WhatsAppButton
+import './App.css';
 
 const App = () => {
   const [selectedSection, setSelectedSection] = useState(null);

@@ -5,14 +5,14 @@ import RepuestosList from './Repuestos';
 import ContactForm from './Contacto';
 import MarcaList from './Marcas'; // Importa el componente MarcaList
 import ClientesList from './Clientes';
+import About from './About';
 import './Home.css';
 
-const Home = () => {
+const Home = ({isHome=true}) => {
   return (
     <div>
       <section className="principal">
         <h2 className="principal-titulo-home">Foton en Bahia Blanca y la zona</h2>
-        {/* <h2>FOTON BAHIA</h2> */}
         <div className='container'>
           <p className="principal-texto-home">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate in veniam nam repellendus expedita facilis autem! Quas aperiam neque exercitationem! Libero maxime magnam repellendus assumenda aliquam blanditiis provident ullam eaque?</p>
         </div>
@@ -22,22 +22,22 @@ const Home = () => {
         <h2 className="principal-titulo-home">Nuestros Vehiculos</h2>
         <CategoriaList />
       </section>
-      <section  id="marcas"> {/* Agrega una sección para mostrar las marcas */}
-        <h2 className="principal-titulo-home">Marcas</h2>
+      <section id="marcas"> {/* Agrega una sección para mostrar las marcas */}
+        <h2 className="principal-titulo-home" style={{color:"white", margin:"0", paddingTop:"1em"}}>Marcas</h2>
         <MarcaList /> {/* Agrega el componente MarcaList */}
       </section>
       <section id="repuestos">
-        {/* <h2 className="principal-titulo">Repuestos</h2> */}
-        <RepuestosList />
+      <RepuestosList isHome={isHome}/>
       </section>
       <section id="clientes"> {/* Agrega una sección para mostrar las marcas */}
         <h2 className="principal-titulo-home">Clientes</h2>
         <ClientesList /> {/* Agrega el componente MarcaList */}
       </section>
-    
+      <section id="nosotros">
+        <About isHome={isHome}/>
+      </section>
       <section id="contacto">
-        {/* <h2 className="principal-titulo">Contacto</h2> */}
-        <ContactForm />
+        <ContactForm isHome={isHome}/>
       </section>
     </div>
   );

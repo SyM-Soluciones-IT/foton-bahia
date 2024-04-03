@@ -13,7 +13,10 @@
   color: #ca173e;
   margin-bottom: 1em;
 }
-  
+
+.principal-titulo-seccion{
+  display: none;
+}
 
 .principal-texto-home{
   text-align: center;
@@ -27,6 +30,12 @@
   margin-right: 10%;
 }
 
+#marcas{
+  background-color: #ca173e;
+  color: white;
+  height: max-content;
+}
+
 
 @media (min-width: 992px) {
   .principal-titulo-home{
@@ -34,5 +43,10 @@
   }
   .principal-texto-home{
     font-size: 1.2em !important;
+  }
+  #marcas{
+    background-color: #ca173e;
+    color: white;
+    height: 370px;
   }
 }

@@ -144,11 +144,20 @@
   margin-top: 2em;
 }
 
+.card-productos{
+  border: 1px solid black;
+  border-radius: 5px;
+}
 
 @media (min-width: 768px) {
-  .card{
-  width: 65%;
+  .card-productos{
+   width: 65%;
   }
+  .card-productos:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
   .card-img-top{
     width: 70%;
     object-fit: contain !important;
@@ -184,6 +193,10 @@
   }
 
   .card-body-productos{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     height: 300px;
   }
   .image-card{

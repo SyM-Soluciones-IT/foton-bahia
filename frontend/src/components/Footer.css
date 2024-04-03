@@ -1,8 +1,13 @@
 /* Footer */
 .footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4em;
   background-color: #000; /* Fondo negro */
   color: #fff; /* Texto blanco */
   padding: 50px 0; /* Ajusta el padding según sea necesario */
+  text-align: center;
 }
 
 .footer h5 {
@@ -50,14 +55,18 @@
   border: none; /* Sin borde */
   padding: 10px; /* Ajusta el padding según sea necesario */
   flex: 1; /* Expandir el input para ocupar el espacio disponible */
+  width: 70%;
+  max-width: 250px;
 }
 
 .footer form button {
   background-color: #007bff; /* Fondo azul para botón */
   color: #fff; /* Texto blanco para botón */
   border: none; /* Sin borde */
-  padding: 10px 20px; /* Ajusta el padding según sea necesario */
+  padding: 10px; /* Ajusta el padding según sea necesario */
   cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  width: fit-content; /* Ancho completo */
+  overflow-x: dotted;
 }
 
 .footer form button:hover {
@@ -74,6 +83,8 @@
 .footer .social-icons a {
   display: inline-block; /* Mostrar los iconos como elementos en línea */
   margin: 0 20px; /* Espaciado horizontal entre iconos */
+  text-decoration: none;
+  color: #fff; /* Color de enlaces blancos */
 }
 
 /* YouTube */

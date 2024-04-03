@@ -7,7 +7,7 @@ import "./Footer.css"; // Estilo personalizado para el footer
 const Footer = () => {
   return (
     <footer className="footer">
-      <Container>
+      
         <Row>
           <Col xs={12} sm={6} md={3}>
             <h5>Información</h5>
@@ -41,15 +41,14 @@ const Footer = () => {
               </a>
             </div>
           </Col>
-          <Col xs={12} sm={6} md={3}>
+          <Col xs={12} sm={6} md={3} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
             <h5>Suscríbete</h5>
-            {/* Aquí puedes incluir el formulario */}
             <form>
               <input type="email" placeholder="Email" required />
               <button type="submit">Suscríbete</button>
             </form>
           </Col>
-          <Col xs={12} md={3}>
+          <Col xs={12} sm={6} md={3}>
             <h5>Contacto</h5>
             <p>
               Hipólito Yrigoyen 3871, B8000 Bahía Blanca, Provincia de Buenos
@@ -67,7 +66,7 @@ const Footer = () => {
             </p>
           </Col>
         </Row>
-      </Container>
+
     </footer>
   );
 };

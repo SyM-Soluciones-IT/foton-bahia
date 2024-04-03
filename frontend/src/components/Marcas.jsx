@@ -20,7 +20,6 @@ const MarcaList = () => {
   };
 
   return (
-    <div className='container'>
       <div className="marca-list">
         {marcas.map(marca => (
           <div key={marca._id} className="marca-item">
@@ -32,7 +31,6 @@ const MarcaList = () => {
           </div>
         ))}
       </div>
-    </div>
   );
 };
 
