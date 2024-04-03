@@ -19,7 +19,7 @@ const About = ({isHome=false}) => {
           En el corazón de nuestra historia yace un espíritu pionero que se remonta a décadas atrás. Todo comenzó en los vibrantes años 80, cuando un grupo de visionarios se unió con un propósito común: transformar la movilidad urbana para siempre. Desde nuestros humildes inicios como un taller de reparación de bicicletas hasta convertirnos en un referente global en soluciones de movilidad sostenible, nuestro viaje ha sido marcado por la innovación y el compromiso con la excelencia. A lo largo de los años, hemos superado desafíos, celebrado triunfos y aprendido lecciones valiosas que han forjado el camino hacia el futuro. Hoy, mientras reflexionamos sobre nuestra historia, miramos hacia adelante con entusiasmo, listos para continuar nuestro legado de transformación y liderazgo en la industria de la movilidad.
           </p>
         </div>
-        <img src="https://fotonesmicamion.com/wp-content/uploads/2023/07/historia-nosotros.jpg.webp" alt="Imagen de camiones" style={{ width:"100%", minHeight: "220px", objectFit: "cover", marginBottom:"1em"}}/>
+        <img src="https://fotonesmicamion.com/wp-content/uploads/2023/07/historia-nosotros.jpg.webp" alt="Imagen de camiones" style={{ width:"100%", minHeight: "220px", maxHeight: "400px", objectFit: "cover"}}/>
       </div>
     </section>
   );

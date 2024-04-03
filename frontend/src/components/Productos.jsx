@@ -165,13 +165,14 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
       )}
       {/* Renderizar productos solo cuando no se están cargando */}
       {!loading && (
-        <div className="row" style={{ marginTop: "1em", width: "100%" }}>
+        <div className="row" style={{ marginTop: "1em", width: "100%", display: "flex", flexDirection: "row", justifyContent: "center"}}>
           {currentProducts.map((producto) => (
-            <div key={producto._id} className="col-md-4 mb-4">
+            <div key={producto._id} className="col-md-4 mb-4" style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
               <div
                 className="card-productos"
                 style={{
                   marginTop: "10px",
+                  width: "300px"
                 }}
               >
                 <Carousel

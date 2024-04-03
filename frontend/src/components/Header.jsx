@@ -167,7 +167,7 @@ const Header = ({ onSectionChange }) => {
                 <div
                   className="nav-link dropdown-toggle custom-button vehiculos-dropdown"
                   onClick={handleCategoryClick}
-                  style={{ cursor: "pointer", width: "fit-content", padding: "15px", borderRadius: "15px"}}
+                  style={{ cursor: "pointer", width: "fit-content", padding: "1px 5px 2px" }}
                 >
                   Nuestros Vehículos
                 </div>

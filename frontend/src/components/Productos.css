@@ -47,7 +47,6 @@
 
 /* Estilos para la navbar de categorías */
 .navbar-categorias {
-  background-color: gray;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
@@ -147,16 +146,14 @@
 .card-productos{
   border: 1px solid black;
   border-radius: 5px;
+  width: max-content;
+}
+
+.image-card{
+  margin: 0;
 }
 
 @media (min-width: 768px) {
-  .card-productos{
-   width: 65%;
-  }
-  .card-productos:hover{
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
 
   .card-img-top{
     width: 70%;
@@ -190,6 +187,11 @@
 .nav-categorias{
     display: flex;
     justify-content: center;
+  }
+
+  .card-productos:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
 
   .card-body-productos{

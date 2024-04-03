@@ -10,7 +10,7 @@ import './Home.css';
 
 const Home = ({isHome=true}) => {
   return (
-    <div>
+    <div style={{display:"flex", flexDirection:"column", alignItems:"center", flexWrap:"wrap"}}>
       <section className="principal">
         <h2 className="principal-titulo-home">Foton en Bahia Blanca y la zona</h2>
         <div className='container'>

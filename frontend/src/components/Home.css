@@ -34,8 +34,25 @@
   background-color: #ca173e;
   color: white;
   height: max-content;
+  width: 80%;
+  align-self: center;
 }
 
+#clientes{
+  width: 80%;
+}
+
+#repuestos{
+  width: 80%;
+}
+
+#nosotros{
+  width: 80%;
+}
+
+#contacto{
+  width: 80%;
+}
 
 @media (min-width: 992px) {
   .principal-titulo-home{
@@ -47,6 +64,5 @@
   #marcas{
     background-color: #ca173e;
     color: white;
-    height: 370px;
   }
 }
