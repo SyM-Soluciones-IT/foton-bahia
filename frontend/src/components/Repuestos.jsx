@@ -36,8 +36,8 @@ const PostVenta = ({isHome=false}) => {
       <div className="contenedor-top">
           <Card className="tarjeta">
           <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold"}}>Garantía</Card.Title>
-            <Card.Body className="text-center" >
-              <Card.Img variant="bottom" style={{ width: "300px", height: "350px" }} src="https://i.ibb.co/ZNYYxQb/images.jpg" />
+            <Card.Body className="text-center tarjeta-body">
+              <Card.Img variant="bottom" style={{ width: "300px", height: "350px"}} src="https://i.ibb.co/ZNYYxQb/images.jpg" />
               <Card.Text style={{marginTop: ".7em", minHeight: "100px", display: "flex", alignItems: "center"}}>
                 Nuestros vehiculos cuentan con una garantia de 100.000kms o 3
                 años lo que suceda primero.
@@ -46,7 +46,7 @@ const PostVenta = ({isHome=false}) => {
           </Card>
         <Card className="tarjeta">
           <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold"}}>Repuestos</Card.Title>
-            <Card.Body className="text-center">
+            <Card.Body className="text-center tarjeta-body">
               <Card.Img variant="bottom" style={{ width: "300px", height: "350px" }} src="https://i.ibb.co/Nym7Cbv/bahia-mobility-repuestos.jpg" />
               <Card.Text style={{marginTop: ".7em", minHeight: "100px", display: "flex", alignItems: "center"}}>
                 En Bahia Mobility todos los repuestos son originales,
@@ -59,8 +59,8 @@ const PostVenta = ({isHome=false}) => {
       <div className="contenedor-top">
 
         <Card className="tarjeta">
-            <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold", marginTop: "1em"}}>Cuidados Básicos de tu Unidad</Card.Title>
-            <Card.Body className="text-center">
+            <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold", marginTop: "1em"}}>Cuidados de tu Unidad</Card.Title>
+            <Card.Body className="text-center tarjeta-body">
               <Card.Img variant="bottom" style={{ width: "300px", height: "350px" }} src="https://i.ibb.co/q9gGhwV/POST.jpg" />
               <Card.Text style={{marginTop: ".7em",  minHeight: "100px", display: "flex", alignItems: "center"}}>
                 Cuidados preventivos para mantener tu vehículo en excelentes condiciones por mas tiempo
@@ -70,7 +70,7 @@ const PostVenta = ({isHome=false}) => {
           </Card>
         <Card className="tarjeta">
             <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold", marginTop: "1em"}}>Reparaciones</Card.Title>
-            <Card.Body className="text-center">
+            <Card.Body className="text-center tarjeta-body">
               <Card.Img variant="bottom" style={{ width: "300px",height: "350px" }} src="https://i.ibb.co/mzVTrnQ/2024-03-13.jpg" />
               <Card.Text style={{marginTop: ".7em",  minHeight: "100px", display: "flex", alignItems: "center"}}>
                 Contamos con un equipo de reparaciones de alta tecnología. Ante

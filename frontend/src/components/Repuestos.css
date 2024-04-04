@@ -29,6 +29,13 @@
   padding: 10px;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
+  align-content: space-between !important;
+}
+
+.tarjeta-body{
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
 }
 
 img {

@@ -2,13 +2,15 @@
   display: flex;
   justify-content: center;
   width: 60%;
-}
+} */
 
 .centered-slide {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-} */
+  margin-right: 1em;
+}
+
+.centered-slide:last-of-type {
+  margin-right: 0;
+}
 
 .marca-list {
   display: flex;
