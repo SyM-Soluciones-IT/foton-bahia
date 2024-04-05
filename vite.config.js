@@ -10,14 +10,14 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src') // Si `App.js` está dentro de `src`
+      '@': path.resolve(__dirname, './frontend/src') // Si `App.js` está dentro de `src`
     }
   },
   build: {
     outDir: '../public', // Especifica el directorio de salida
     rollupOptions: {
       input: {
-        main: './src/App.jsx' // Especifica la ruta de tu archivo principal aquí
+        main: './frontend/src/App.jsx' // Especifica la ruta de tu archivo principal aquí
       }
     },
   }
