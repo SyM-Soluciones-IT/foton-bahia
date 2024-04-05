@@ -1,5 +1,5 @@
 import React from 'react'
-import App from '../src/App.jsx'
+import App from './src/App.jsx'
 import { createRoot } from 'react-dom';
 import './index.css'
 
