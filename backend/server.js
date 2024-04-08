@@ -32,6 +32,10 @@ app.use('/api/marcas', marcasRouter);
 app.use('/api/clientes', clientesRouter);
 app.use('/api/usados', usadosRouter);
 
+app.get('/', (req, res) => {
+    res.json('Hello World!');
+})
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
