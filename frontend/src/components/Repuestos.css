@@ -48,6 +48,9 @@ img {
   flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
   justify-content: space-evenly;
 }
+.imagen-repuestos{
+  align-self: center;
+}
 
 @media (min-width: 768px) {
   /* Estilos para pantallas de tamaño medio */
@@ -61,4 +64,5 @@ img {
   .contenedor-top {
     width: 80%; /* Ajusta el ancho del contenedor en pantallas grandes */
   }
+  
 }

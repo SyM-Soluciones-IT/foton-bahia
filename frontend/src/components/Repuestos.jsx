@@ -8,7 +8,7 @@ const PostVenta = ({isHome=false}) => {
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
   return (
-    <div className="contenedor" style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <div className="contenedor" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <h2 className={isHome ? "principal-titulo-home" : "principal-titulo-seccion"}>Post Venta</h2>
         <div className="intro-repuestos" style={{ width: "80%"}}>
         
@@ -37,7 +37,7 @@ const PostVenta = ({isHome=false}) => {
           <Card className="tarjeta">
           <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold"}}>Garantía</Card.Title>
             <Card.Body className="text-center tarjeta-body">
-              <Card.Img variant="bottom" style={{ width: "300px", height: "350px"}} src="https://i.ibb.co/ZNYYxQb/images.jpg" />
+              <Card.Img variant="bottom" className="imagen-repuestos" style={{ width: "300px", height: "350px"}} src="https://i.ibb.co/ZNYYxQb/images.jpg" />
               <Card.Text style={{marginTop: ".7em", minHeight: "100px", display: "flex", alignItems: "center"}}>
                 Nuestros vehiculos cuentan con una garantia de 100.000kms o 3
                 años lo que suceda primero.
@@ -47,7 +47,7 @@ const PostVenta = ({isHome=false}) => {
         <Card className="tarjeta">
           <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold"}}>Repuestos</Card.Title>
             <Card.Body className="text-center tarjeta-body">
-              <Card.Img variant="bottom" style={{ width: "300px", height: "350px" }} src="https://i.ibb.co/Nym7Cbv/bahia-mobility-repuestos.jpg" />
+              <Card.Img className="imagen-repuestos" variant="bottom" style={{ width: "300px", height: "350px" }} src="https://i.ibb.co/Nym7Cbv/bahia-mobility-repuestos.jpg" />
               <Card.Text style={{marginTop: ".7em", minHeight: "100px", display: "flex", alignItems: "center"}}>
                 En Bahia Mobility todos los repuestos son originales,
                 garantizando asi que tu vehículo siempre este en perfecto
@@ -61,7 +61,7 @@ const PostVenta = ({isHome=false}) => {
         <Card className="tarjeta">
             <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold", marginTop: "1em"}}>Cuidados de tu Unidad</Card.Title>
             <Card.Body className="text-center tarjeta-body">
-              <Card.Img variant="bottom" style={{ width: "300px", height: "350px" }} src="https://i.ibb.co/q9gGhwV/POST.jpg" />
+              <Card.Img className="imagen-repuestos" variant="bottom" style={{ width: "300px", height: "350px" }} src="https://i.ibb.co/q9gGhwV/POST.jpg" />
               <Card.Text style={{marginTop: ".7em",  minHeight: "100px", display: "flex", alignItems: "center"}}>
                 Cuidados preventivos para mantener tu vehículo en excelentes condiciones por mas tiempo
               </Card.Text>
@@ -71,7 +71,7 @@ const PostVenta = ({isHome=false}) => {
         <Card className="tarjeta">
             <Card.Title style={{ textAlign: "center" , fontSize: "1.5em", fontWeight: "bold", marginTop: "1em"}}>Reparaciones</Card.Title>
             <Card.Body className="text-center tarjeta-body">
-              <Card.Img variant="bottom" style={{ width: "300px",height: "350px" }} src="https://i.ibb.co/mzVTrnQ/2024-03-13.jpg" />
+              <Card.Img className="imagen-repuestos" variant="bottom" style={{ width: "300px",height: "350px" }} src="https://i.ibb.co/mzVTrnQ/2024-03-13.jpg" />
               <Card.Text style={{marginTop: ".7em",  minHeight: "100px", display: "flex", alignItems: "center"}}>
                 Contamos con un equipo de reparaciones de alta tecnología. Ante
                 cualquier inconveniente no dude en solicitar su turno mediante
