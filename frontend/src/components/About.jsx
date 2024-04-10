@@ -10,7 +10,7 @@ const About = ({isHome=false}) => {
         <p className="principal-texto">
         "Bahia Mobility es líder en soluciones de movilidad urbana sostenible. Nuestra empresa está comprometida con la innovación y la excelencia, ofreciendo productos y servicios de calidad que promueven un futuro más limpio y eficiente. Explora nuestra amplia gama de soluciones y descubre cómo estamos transformando la manera en que nos movemos en las ciudades. Desde vehículos eléctricos hasta sistemas de transporte inteligente, en Bahia Mobility estamos dedicados a crear un entorno urbano más accesible, seguro y respetuoso con el medio ambiente. Únete a nosotros en nuestro compromiso con la movilidad sostenible y haz parte del cambio hacia un futuro mejor."
         </p>
-        <img src="https://i.ibb.co/5szXyHg/camiones.webp" alt="Imagen de camiones" style={{width: "100vw", minHeight: "220px", objectFit: "cover"}}/>
+        <img src="https://i.ibb.co/5szXyHg/camiones.webp" alt="Imagen de camiones" style={{width: "100vw", minHeight: "220px", objectFit: "cover", marginTop: "1em"}}/>
       </div>
       <div className="contenedor-dos" >
         <div className="sub-contenedor-2">

@@ -16,11 +16,18 @@
   margin-left: 5% !important;
   margin-right: 5% !important;
 }
+
+.contenedor-uno{
+  margin-bottom: 3em !important;
+}
+
 .contenedor-uno, .contenedor-dos{
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
 }
+
+
 
 @media (min-width: 992px) {
   #about{
@@ -49,7 +56,6 @@
     gap: 2em !important;
     margin-left: 10% !important;
     margin-right: 10% !important;
-    margin-bottom: 2em !important;
     align-items: center !important;
     width: 100vw !important;
     background-color: #ca213b !important;

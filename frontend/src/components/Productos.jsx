@@ -102,7 +102,10 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
 
   return (
     <div className="container contenedor text-center d-flex flex-column align-items-center">
-      <h2 className="principal-titulo-seccion" style={{ marginBottom: "0" }}>{categoria}</h2>
+      <div className="contenedor-titulo-categoria">
+        <h2 className="principal-titulo-seccion" style={{ marginBottom: "0" }}>{categoria}</h2>
+        <p className="descripcion-seccion">{categorias.find((cat) => cat.name === categoria)?.description}</p>
+      </div>
       <div
         className="container-categorias"
         style={{ backgroundColor: "#5d5d5d", color: "white", width: "100vw" }}
