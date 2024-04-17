@@ -38,24 +38,24 @@ const ContactForm = ({isHome=false}) => {
     <div >
       <h2 className={isHome ? "principal-titulo-home" : "principal-titulo-seccion"}>Contacto</h2>
       <Container>
-      <Form onSubmit={handleSubmit} className="mt-4 p-4 border rounded" style={{backgroundColor: "#da1d27"}}>
+      <Form onSubmit={handleSubmit} className="mt-4 p-4 border rounded" style={{backgroundColor: "#da1d27", display: "flex", flexDirection: "column"}}>
         <Form.Group controlId="formName">
-          <Form.Label style={{color: "white"}}>Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter your name" value={name} onChange={(e) => setName(e.target.value)} />
+          <Form.Label style={{color: "white"}}>Nombre</Form.Label>
+          <Form.Control type="text" placeholder="Ingrese su nombre" value={name} onChange={(e) => setName(e.target.value)} />
         </Form.Group>
         <Form.Group controlId="formEmail">
-          <Form.Label style={{color: "white"}}>Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Form.Label style={{color: "white"}}>Correo Electrónico</Form.Label>
+          <Form.Control type="email" placeholder="Ingrese su correo" value={email} onChange={(e) => setEmail(e.target.value)} />
         </Form.Group>
         <Form.Group controlId="formAsunto">
           <Form.Label style={{color: "white"}}>Asunto</Form.Label>
-          <Form.Control type="text" placeholder="Enter the subject" value={asunto} onChange={(e) => setAsunto(e.target.value)} />
+          <Form.Control type="text" placeholder="Ingrese el asunto" value={asunto} onChange={(e) => setAsunto(e.target.value)} />
         </Form.Group>
         <Form.Group controlId="formMessage">
-          <Form.Label style={{color: "white"}}>Message</Form.Label>
-          <Form.Control as="textarea" rows={3} placeholder="Enter your message" value={message} onChange={(e) => setMessage(e.target.value)} />
+          <Form.Label style={{color: "white"}}>Mensaje</Form.Label>
+          <Form.Control as="textarea" rows={3} placeholder="Ingrese su mensaje" value={message} onChange={(e) => setMessage(e.target.value)} />
         </Form.Group>
-        <Button variant="primary" type="submit" className="mt-2">Send</Button>
+        <Button variant="primary" type="submit" className="align-self-center mt-2">Enviar</Button>
       </Form>
       </Container>
     </div>

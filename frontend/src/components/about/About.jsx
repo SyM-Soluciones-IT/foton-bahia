@@ -1,5 +1,4 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import "./About.css"; // Archivo CSS para los estilos específicos del componente
 import { ABOUT_TEXT } from "../contentText/ContentText"; // Importa las constantes de texto
 
