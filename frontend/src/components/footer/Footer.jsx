@@ -42,7 +42,7 @@ const Footer = () => {
             </div>
           </Col>
           <Col xs={12} sm={6} md={3} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <h5>Suscríbete</h5>
+            <h5>Enterate las novedades</h5>
             <form>
               <input type="email" placeholder="Email" required />
               <button type="submit">Suscríbete</button>

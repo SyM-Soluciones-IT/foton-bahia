@@ -18,19 +18,21 @@ connection.once('open', () => {
 });
 
 // Rutas para acceder a los datos y manejar el formulario de contacto
-const productosRouter = require('./routes/productos'); // Cambia el nombre del router aquí
-const partsRouter = require('./routes/repuestos');
-const contactRouter = require('./routes/contacto');
-const marcasRouter = require('./routes/marcas'); // Agregar la ruta para las marcas
-const clientesRouter = require('./routes/clientes');
-const usadosRouter = require('./routes/usados');
+const vehiclesRouter = require('./routes/vehicles'); // Cambia el nombre del router aquí
+const sparePartsRouter = require('./routes/spareParts');
+const contactRouter = require('./routes/contact');
+const brandsRouter = require('./routes/brands'); // Agregar la ruta para las marcas
+const clientsRouter = require('./routes/clients');
+const usedsRouter = require('./routes/useds');
+const categoriesRouter = require('./routes/categories');
 
-app.use('/api/productos', productosRouter); // Cambia la ruta aquí
-app.use('/api/repuestos', partsRouter);
+app.use('/api/vehiculos', vehiclesRouter); // Cambia la ruta aquí
+app.use('/api/repuestos', sparePartsRouter);
 app.use('/api/contacto', contactRouter);
-app.use('/api/marcas', marcasRouter);
-app.use('/api/clientes', clientesRouter);
-app.use('/api/usados', usadosRouter);
+app.use('/api/marcas', brandsRouter);
+app.use('/api/clientes', clientsRouter);
+app.use('/api/usados', usedsRouter);
+app.use('/api/categorias', categoriesRouter);
 
 app.get('/', (req, res) => {
     res.json('Hello World!');

@@ -1,38 +1,59 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Navbar, Nav, Modal, Button, Carousel, Spinner } from "react-bootstrap";
-import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
-import "./Productos.css";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+import { getVehicles, getCategories } from "../../services/services";
+import "./Vehicles.css";
 
-const ProductosList = ({ onSectionChange, selectedSection }) => {
-  const [categorias, setCategorias] = useState([]);
-  const [productos, setProductos] = useState([]);
-  const { categoria } = useParams();
+const Vehicles = ({ onSectionChange, selectedSection }) => {
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState(null);
+  const [vehicles, setVehicles] = useState([]);
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(6); // Número de productos por página
+  const [vehiclesPerPage] = useState(6); // Número de productos por página
   const [loading, setLoading] = useState(true); // Estado para controlar la carga de productos
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    obtenerCategorias();
-    if (categoria) {
-      setLoading(true);
-      getProductos(categoria);
-      resetPagination();
-    } else {
-      setProductos([]);
-    }
+    const fetchCategories = async () => {
+      try {
+        const categoriesData = await getCategories();
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchCategories();
+    const pathname = decodeURIComponent(location.pathname);
+    setCategory(pathname.split("/")[2]);
+  }, [location]);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      if (category) { // Verifica que category no sea null o undefined
+        try {
+          setLoading(true);
+          const vehiclesData = await getVehicles(category); // Usar el valor de category de los parámetros de la URL
+          setVehicles(vehiclesData);
+        } catch (error) {
+          console.error("Error fetching vehicles:", error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+    fetchData();
+    resetPagination();
     updateSelectedSection();
-  }, [categoria, location]);
+  }, [category]);
 
   const updateSelectedSection = () => {
     const pathname = decodeURIComponent(location.pathname);
-    const categoriaName = pathname.split("/")[2];
-    onSectionChange(categoriaName);
+    const categoryName = pathname.split("/")[2];
+    onSectionChange(categoryName);
   };
 
   const handleToggleClick = () => {
@@ -46,8 +67,8 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
     }
   };
 
-  const handleCotizarClick = (producto) => {
-    setSelectedProduct(producto);
+  const handleCotizarClick = (vehicle) => {
+    setSelectedVehicle(vehicle);
     setShowModal(true);
   };
 
@@ -55,43 +76,12 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
     setShowModal(false);
   };
 
-  const obtenerCategorias = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/api/productos");
-      if (response.status === 200) {
-        setCategorias(response.data);
-      } else {
-        console.error("Error fetching categorias:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error fetching categorias:", error);
-    }
-  };
-
-  const getProductos = async (categoria) => {
-    setProductos([]);
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/api/productos/${categoria}`
-      );
-      if (response.status === 200) {
-        setProductos(response.data);
-      } else {
-        console.error("Error fetching productos:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error fetching productos:", error);
-    } finally {
-      setLoading(false); // Desactivar la carga después de que los productos estén cargados
-    }
-  };
-
   // Calcular índices de los productos para la página actual
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = productos.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
+  const indexOfLastVehicle = currentPage * vehiclesPerPage;
+  const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
+  const currentVehicles = vehicles.slice(
+    indexOfFirstVehicle,
+    indexOfLastVehicle
   );
 
   // Cambiar página
@@ -103,8 +93,8 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
   return (
     <div className="container contenedor text-center d-flex flex-column align-items-center">
       <div className="contenedor-titulo-categoria">
-        <h2 className="principal-titulo-seccion" style={{ marginBottom: "0" }}>{categoria}</h2>
-        <p className="descripcion-seccion">{categorias.find((cat) => cat.name === categoria)?.description}</p>
+        <h2 className="principal-titulo-seccion" style={{ marginBottom: "0" }}>{category}</h2>
+        <p className="descripcion-seccion">{categories.find((cat) => cat.name === category)?.description}</p>
       </div>
       <div
         className="container-categorias"
@@ -131,15 +121,15 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
             className="nav-categorias"
           >
             <Nav className="mr-auto navbar-categorias">
-              {categorias.map((categoria) => (
+              {categories.map((category) => (
                 <Nav.Link
                   className="nav-link-categorias"
-                  key={categoria._id}
+                  key={category._id}
                   as={Link}
-                  to={`/productos/${categoria.name} `}
+                  to={`/vehiculos/${category.name} `}
                   style={{
                     backgroundColor:
-                      selectedSection === categoria.name
+                      selectedSection === category.name
                         ? "#ca213b"
                         : "#5d5d5d",
                     color: "white",
@@ -147,10 +137,10 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
                     fontSize: "1.2em",               
                   }}
                   onClick={() => {
-                    handleSectionClick(categoria.name);
+                    handleSectionClick(category.name);
                   }}
                 >
-                  {categoria.name}
+                  {category.name}
                 </Nav.Link>
                 
               ))}
@@ -169,8 +159,8 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
       {/* Renderizar productos solo cuando no se están cargando */}
       {!loading && (
         <div className="row" style={{ marginTop: "1em", width: "100%", display: "flex", flexDirection: "row", justifyContent: "center"}}>
-          {currentProducts.map((producto) => (
-            <div key={producto._id} className="col-md-4 mb-4" style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+          {currentVehicles.map((vehicle) => (
+            <div key={vehicle._id} className="col-md-4 mb-4" style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
               <div
                 className="card-productos"
                 style={{
@@ -182,11 +172,11 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
                   style={{ borderBottom: "1px solid black" }}
                   interval={null}
                   controls={
-                    producto.image.length > 1 || producto.video.length > 0
+                    vehicle.image.length > 1 || vehicle.video.length > 0
                   }
                 >
                   {/* Renderizar imágenes */}
-                  {producto.image.map((image, index) => (
+                  {vehicle.image.map((image, index) => (
                     <Carousel.Item key={index}>
                       <img
                         className="d-block w-100 image-card"
@@ -201,8 +191,8 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
                     </Carousel.Item>
                   ))}
                   {/* Condición para renderizar videos solo si existe al menos uno */}
-                  {producto.video.length > 0 &&
-                    producto.video.map((video, index) => (
+                  {vehicle.video.length > 0 &&
+                    vehicle.video.map((video, index) => (
                       <Carousel.Item key={index}>
                         <iframe
                           width="100%"
@@ -220,24 +210,24 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
                     ))}
                 </Carousel>
                 <div className="card-body-productos">
-                  <h5 className="card-title" style={{ width: "100%" , fontWeight: "bold", borderBottom: "1px solid black"}}>{producto.name}</h5>
+                  <h5 className="card-title" style={{ width: "100%" , fontWeight: "bold", borderBottom: "1px solid black"}}>{vehicle.name}</h5>
                   <p className="card-text" style={{ textAlign: "center" }}>
                     {" "}
                     <strong>Motor: </strong>
-                    {producto.engine}
+                    {vehicle.engine}
                   </p>
                   <p className="card-text" style={{ textAlign: "center" }}>
-                    <strong>Potencia:</strong> {producto.power}
+                    <strong>Potencia:</strong> {vehicle.power}
                   </p>
                   <p className="card-text" style={{ textAlign: "center" }}>
-                    <strong>Transmisión:</strong> {producto.gearbox}
+                    <strong>Transmisión:</strong> {vehicle.gearbox}
                   </p>
                   <p className="card-text" style={{ textAlign: "center" }}>
-                    <strong>PBT:</strong> {producto.load}
+                    <strong>PBT:</strong> {vehicle.load}
                   </p>
-                  {producto.datasheet && producto.datasheet !== "" && (
+                  {vehicle.datasheet && vehicle.datasheet !== "" && (
                     <a
-                      href={producto.datasheet}
+                      href={vehicle.datasheet}
                       target="_self"
                       rel="noopener noreferrer"
                       className="btn btn-primary"
@@ -248,7 +238,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
                   <button
                     className="btn btn-primary"
                     style={{ width: "fit-content" }}
-                    onClick={() => handleCotizarClick(producto)}
+                    onClick={() => handleCotizarClick(vehicle)}
                   >
                     Cotiza aquí
                   </button>
@@ -262,7 +252,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
       <nav>
         <ul className="pagination justify-content-center">
           {Array.from(
-            { length: Math.ceil(productos.length / productsPerPage) },
+            { length: Math.ceil(vehicles.length / vehiclesPerPage) },
             (_, i) => (
               <li
                 key={i + 1}
@@ -288,12 +278,12 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
       {showModal && (
         <Modal show={showModal} onHide={handleCloseModal}>
           <Modal.Header closeButton>
-            <Modal.Title>Cotizar Producto</Modal.Title>
+            <Modal.Title>Cotizar Vehiculo</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {selectedProduct && (
+            {selectedVehicle && (
               <p>
-                Elija una opción para cotizar el producto {selectedProduct.name}
+                Elija una opción para cotizar el producto {selectedVehicle.name}
                 :
               </p>
             )}
@@ -302,7 +292,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
               style={{ marginRight: "5px", marginBottom: "5px" }}
               onClick={() => {
                 const mensaje = encodeURIComponent(
-                  `Hola, quiero cotizar el producto ${selectedProduct.name}`
+                  `Hola, quiero cotizar el producto ${selectedVehicle.name}`
                 );
                 window.open(`https://wa.me/+5492916446200/?text=${mensaje}`);
               }}
@@ -315,7 +305,7 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
               onClick={() => {
                 navigate(
                   `/contacto?asunto=Cotizacion ${encodeURIComponent(
-                    selectedProduct.name
+                    selectedVehicle.name
                   )}`
                 );
               }}
@@ -329,4 +319,4 @@ const ProductosList = ({ onSectionChange, selectedSection }) => {
   );
 };
 
-export default ProductosList;
+export default Vehicles;

@@ -1,4 +1,4 @@
-.custom-navbar {
+/* .custom-navbar {
   background-color: #19191b !important;
   color: #fff !important;
   position: fixed;
@@ -21,10 +21,10 @@
 }
 
 .custom-nav-links .nav-link.active {
-  color: #000 !important; /* Letras en negro */
-  background-color: #fff; /* Fondo blanco */
-  border-radius: 5px; /* Bordes redondeados */
-  padding: 8px 15px; /* Ajuste de espaciado */
+  color: #000 !important; 
+  background-color: #fff; 
+  border-radius: 5px; 
+  padding: 8px 15px; 
 }
 
-
+*/

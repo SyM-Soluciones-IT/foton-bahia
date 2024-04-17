@@ -1,11 +1,11 @@
-// usados.js
+// marcas.js
 const router = require('express').Router();
-const Usado = require('../models/usado.model');
+const Category = require('../models/category.model');
 
 router.route('/').get(async (req, res) => {
     try {
-        const usados = await Usado.find();
-        res.json(usados);
+        const categories = await Category.find();
+        res.json(categories);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

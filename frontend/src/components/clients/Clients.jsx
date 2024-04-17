@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Slider from 'react-infinite-logo-slider';
 import axios from 'axios';
 import { Card, CardImg, CardBody } from 'react-bootstrap'; // Importa componentes de tarjeta de Reactstrap o la librería que estés utilizando
-import './Marcas.css';
+import '../brands/Brands.css';
 
 const ClientesList = () => {
   const [clientes, setClientes] = useState([]);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card, CardImg, CardBody } from 'react-bootstrap';
-import './Marcas.css';
+import './Brands.css';
 
 const MarcaList = () => {
   const [marcas, setMarcas] = useState([]);

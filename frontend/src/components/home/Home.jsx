@@ -1,11 +1,11 @@
 // En el componente Home.js
 import React from 'react';
-import CategoriaList from './Categorias';
-import RepuestosList from './Repuestos';
-import ContactForm from './Contacto';
-import MarcaList from './Marcas'; // Importa el componente MarcaList
-import ClientesList from './Clientes';
-import About from './About';
+import CategoriaList from '../categories/Categories';
+import RepuestosList from '../after-sell/AfterSell';
+import ContactForm from '../contact/Contact';
+import MarcaList from '../brands/Brands'; // Importa el componente MarcaList
+import ClientesList from '../clients/Clients';
+import About from '../about/About';
 import './Home.css';
 
 const Home = ({isHome=true}) => {

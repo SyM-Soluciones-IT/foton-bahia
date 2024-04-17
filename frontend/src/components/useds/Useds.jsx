@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Modal, Button } from "react-bootstrap"; // Asegúrate de importar Modal y Button de react-bootstrap
 import { useNavigate, useLocation } from "react-router-dom";
-import "./Usados.css";
+import { getUseds } from "../../services/services";
+import "./Useds.css";
 
 const Usados = ({ onSectionChange, selectedSection }) => {
   const [usados, setUsados] = useState([]);
@@ -13,8 +13,16 @@ const Usados = ({ onSectionChange, selectedSection }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getUsados();
-  }, [location]); // Incluir location en las dependencias
+    const fetchData = async () => {
+      try {
+        const usadosData = await getUseds();
+        setUsados(usadosData);
+      } catch (error) {
+        console.error("Error fetching usados:", error);
+      }
+    };
+    fetchData();
+  }, [location]);
 
   const handleToggleClick = () => {
     setIsNavExpanded(!isNavExpanded);
@@ -34,19 +42,6 @@ const Usados = ({ onSectionChange, selectedSection }) => {
 
   const handleCloseModal = () => {
     setShowModal(false);
-  };
-
-  const getUsados = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/api/usados");
-      if (response.status === 200) {
-        setUsados(response.data);
-      } else {
-        console.error("Error fetching usados:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error fetching usados:", error);
-    }
   };
 
   return (

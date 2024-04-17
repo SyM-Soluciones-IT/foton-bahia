@@ -1,7 +1,7 @@
 // Define el esquema del modelo marca
 const mongoose = require('mongoose');
 
-const clienteSchema = new mongoose.Schema({
+const brandSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -13,5 +13,5 @@ const clienteSchema = new mongoose.Schema({
 });
 
 // Crea el modelo marca a partir del esquema
-const Cliente = mongoose.model('Cliente', clienteSchema);
-module.exports = Cliente;
+const Brand = mongoose.model('Brand', brandSchema);
+module.exports = Brand;

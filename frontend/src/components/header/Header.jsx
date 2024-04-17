@@ -9,13 +9,13 @@ import {
   Container,
   Form,
 } from "react-bootstrap";
-import axios from "axios";
-import logoFoton from "../assets/foton-logo-h-nobg.png";
-import logoBahiaMobility from "../assets/logo-bahia-mobility.png";
+import logoFoton from "../../assets/foton-logo-h-nobg.png";
+import logoBahiaMobility from "../../assets/logo-bahia-mobility.png";
+import { getCategories } from "../../services/services";
 import "./Header.css";
 
 const Header = ({ onSectionChange }) => {
-  const [categorias, setCategorias] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [showCategories, setShowCategories] = useState(false);
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const [selectedSection, setSelectedSection] = useState("inicio"); // Se inicializa selectedSection con "inicio"
@@ -47,25 +47,21 @@ const Header = ({ onSectionChange }) => {
   };
 
   useEffect(() => {
-    obtenerCategorias();
+    const fetchCategories = async () => {
+      try {
+        const categoriesData = await getCategories();
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchCategories();
   }, []); // Llamada inicial para obtener las categorías
 
   useEffect(() => {
     updateSelectedSection();
-  }, [location, categorias]); // Se ejecuta cuando cambia la ubicación o las categorías
+  }, [location, categories]); // Se ejecuta cuando cambia la ubicación o las categorías
 
-  const obtenerCategorias = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/api/productos");
-      if (response.status === 200) {
-        setCategorias(response.data);
-      } else {
-        console.error("Error fetching categorias:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error fetching categorias:", error);
-    }
-  };
 
   const updateSelectedSection = () => {
     const pathname = decodeURIComponent(location.pathname);
@@ -80,12 +76,12 @@ const Header = ({ onSectionChange }) => {
     } else if (pathname === "/nosotros") {
       setSelectedSection("nosotros");
     } else {
-      const categoria = categorias.find(
-        (cat) => `/productos/${cat.name}` === pathname
+      const category = categories.find(
+        (cat) => `/vehiculos/${cat.name}` === pathname
       );
-      if (categoria) {
-        onSectionChange(categoria.name);
-        setSelectedSection(categoria.name);
+      if (category) {
+        onSectionChange(category.name);
+        setSelectedSection(category.name);
       } else {
         setSelectedSection("");
       }
@@ -173,26 +169,26 @@ const Header = ({ onSectionChange }) => {
                 </div>
                 {showCategories && (
                   <Nav className="mr-auto show-categories flex-column align-items-center">
-                    {categorias.map((categoria) => (
+                    {categories && categories.map((category) => (
                       <Nav.Link
-                        key={categoria._id}
+                        key={category._id}
                         as={Link}
-                        to={`/productos/${categoria.name}`}
+                        to={`/vehiculos/${category.name}`}
                         style={{
                           backgroundColor:
-                            selectedSection === categoria.name
+                            selectedSection === category.name
                               ? "#ca213b"
                               : "black",
                           color: "white",
                           padding: "1px 5px 2px",
                         }}
                         onClick={() => {
-                          handleSectionClick(categoria.name);
+                          handleSectionClick(category.name);
                           handleCategoryClick();
                           scrollToTop();
                         }}
                       >
-                        {categoria.name}
+                        {category.name}
                       </Nav.Link>
                     ))}
                   </Nav>
@@ -204,14 +200,14 @@ const Header = ({ onSectionChange }) => {
                 className="d-none d-lg-block vehiculos-dropdown"
                 onClick={handleCategoryClick}
               >
-                {categorias.map((categoria) => (
+                {categories && categories.map((category) => (
                   <NavDropdown.Item
-                    key={categoria._id}
+                    key={category._id}
                     as={Link}
-                    to={`/productos/${categoria.name}`}
+                    to={`/vehiculos/${category.name}`}
                     style={{
                       backgroundColor:
-                        selectedSection === categoria.name
+                        selectedSection === category.name
                           ? "#ca213b"
                           : "black",
                       color: "white",
@@ -219,12 +215,12 @@ const Header = ({ onSectionChange }) => {
                       border: "transparent",
                     }}
                     onClick={() => {
-                      handleSectionClick(categoria.name);
+                      handleSectionClick(category.name);
                       handleCategoryClick();
                       scrollToTop();
                     }}
                   >
-                    {categoria.name}
+                    {category.name}
                   </NavDropdown.Item>
                 ))}
               </NavDropdown>

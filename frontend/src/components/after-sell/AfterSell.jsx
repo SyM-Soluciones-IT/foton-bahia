@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Button, Modal } from "react-bootstrap";
 import { RiWhatsappLine, RiMailLine, RiPhoneLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import "./Repuestos.css";
+import "./AfterSell.css";
 
 const PostVenta = ({isHome=false}) => {
   const [showModal, setShowModal] = useState(false);

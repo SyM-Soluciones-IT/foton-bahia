@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const usadoSchema = new Schema({
+const usedSchema = new Schema({
     name: { type: String, required: true },
     description: { type: String },
     image: { type: String },
@@ -10,6 +10,6 @@ const usadoSchema = new Schema({
     year: { type: String }
 });
 
-const Usado = mongoose.model('Usado', usadoSchema);
+const Used = mongoose.model('Used', usedSchema);
 
-module.exports = Usado;
+module.exports = Used;

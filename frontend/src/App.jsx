@@ -4,17 +4,17 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Header from "./components/Header";
-import Home from "./components/Home";
-import Footer from "./components/Footer";
-import Categorias from "./components/Categorias";
-import Productos from "./components/Productos";
-import Repuestos from "./components/Repuestos";
-import Contacto from "./components/Contacto";
-import About from "./components/About";
-import Usados from "./components/Usados";
-import ScrollToTopButton from "./components/ScrollToTopButton"; 
-import WhatsAppButton from './components/WhatsAppButton'; // Importa el componente WhatsAppButton
+import Header from "./components/header/Header";
+import Home from "./components/home/Home";
+import Footer from "./components/footer/Footer";
+import Categories from "./components/categories/Categories";
+import Vehicles from "./components/vehicles/Vehicles";
+import SpareParts from "./components/after-sell/AfterSell";
+import Contact from "./components/contact/Contact";
+import About from "./components/about/About";
+import Useds from "./components/useds/Useds";
+import ScrollToTopButton from "./components/buttons/ScrollToTopButton"; 
+import WhatsAppButton from './components/buttons/WhatsAppButton'; // Importa el componente WhatsAppButton
 import './App.css';
 
 const App = () => {
@@ -34,29 +34,29 @@ const App = () => {
         />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/productos" element={<Categorias />} />
+          <Route exact path="/vehiculos" element={<Categories />} />
           <Route
             exact
-            path="/productos/:categoria"
+            path="/vehiculos/:categoria"
             element={
-              <Productos
+              <Vehicles
                 onSectionChange={handleSectionChange}
                 selectedSection={selectedSection}
               />
             }
           />
-          <Route exact path="/repuestos" element={<Repuestos />} />
+          <Route exact path="/repuestos" element={<SpareParts />} />
           <Route
             exact
             path="/usados"
             element={
-              <Usados
+              <Useds
                 onSectionChange={handleSectionChange}
                 selectedSection={selectedSection}
               />
             }
           />
-          <Route exact path="/contacto" element={<Contacto />} />
+          <Route exact path="/contacto" element={<Contact />} />
           <Route exact path="/nosotros" element={<About />} />
         </Routes>
         <ScrollToTopButton smoothScrollingEnabled={smoothScrollingEnabled} /> {/* Pasa la variable de estado como prop */}

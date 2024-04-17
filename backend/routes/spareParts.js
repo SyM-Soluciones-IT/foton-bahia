@@ -1,11 +1,11 @@
-// marcas.js
+// repuestos.js
 const router = require('express').Router();
-const Cliente = require('../models/cliente.model');
+const SparePart = require('../models/sparePart.model');
 
 router.route('/').get(async (req, res) => {
     try {
-        const clientes = await Cliente.find();
-        res.json(clientes);
+        const spareParts = await SparePart.find();
+        res.json(spareParts);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

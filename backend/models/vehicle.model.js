@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const productoSchema = new Schema({
+const vehicleSchema = new Schema({
     name: { type: String, required: true },
     engine: { type: String },
     category: { type: String },
@@ -14,6 +14,6 @@ const productoSchema = new Schema({
 });
 
 
-const Producto = mongoose.model('Producto', productoSchema);
+const Vehicle = mongoose.model('Vehicle', vehicleSchema);
 
-module.exports = Producto;
+module.exports = Vehicle;

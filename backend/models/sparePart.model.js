@@ -2,11 +2,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const repuestoSchema = new Schema({
+const sparePartSchema = new Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
 });
 
-const Repuesto = mongoose.model('Repuesto', repuestoSchema);
+const SparePart = mongoose.model('SparePart', sparePartSchema);
 
-module.exports = Repuesto;
+module.exports = SparePart;
