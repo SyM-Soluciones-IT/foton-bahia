@@ -1,3 +1,4 @@
+// server.js
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -25,6 +26,7 @@ const brandsRouter = require('./routes/brands'); // Agregar la ruta para las mar
 const clientsRouter = require('./routes/clients');
 const usedsRouter = require('./routes/useds');
 const categoriesRouter = require('./routes/categories');
+const newsletterRouter = require('./routes/newsletter');
 
 app.use('/api/vehiculos', vehiclesRouter); // Cambia la ruta aquí
 app.use('/api/repuestos', sparePartsRouter);
@@ -33,6 +35,7 @@ app.use('/api/marcas', brandsRouter);
 app.use('/api/clientes', clientsRouter);
 app.use('/api/usados', usedsRouter);
 app.use('/api/categorias', categoriesRouter);
+app.use('/api/newsletter', newsletterRouter); // Utiliza las rutas definidas en newsletter.js
 
 app.get('/', (req, res) => {
     res.json('Hello World!');

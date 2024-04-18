@@ -1,8 +1,20 @@
 import axios from "axios";
 
+const API_BASE_URL = "http://localhost:5000/api";
+
+export const subscribeToNewsletter = async (email) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/newsletter/subscribe`, { email });
+    return response.data;
+  } catch (error) {
+    console.error("Error al suscribirse al newsletter:", error);
+    throw error;
+  }
+};
+
 export async function getBrands() {
   try {
-    const response = await axios.get('http://localhost:5000/api/marcas');
+    const response = await axios.get(`${API_BASE_URL}/marcas`);
     return response.data;
   } catch (error) {
     console.error('Error al obtener las marcas:', error);
@@ -11,7 +23,7 @@ export async function getBrands() {
 
 export async function getCategories(){
   try {
-    const response = await axios.get('http://localhost:5000/api/categorias');
+    const response = await axios.get(`${API_BASE_URL}/categorias`);
     return response.data;
   } catch (error) {
     console.error('Error al obtener las categorías:', error);
@@ -20,7 +32,7 @@ export async function getCategories(){
 
 export async function getUseds() {
   try {
-    const response = await axios.get('http://localhost:5000/api/usados');
+    const response = await axios.get(`${API_BASE_URL}/usados`);
     return response.data;
   } catch (error) {
     console.error('Error al obtener los usados:', error);
@@ -29,7 +41,7 @@ export async function getUseds() {
 
 export async function getVehicles(category){
   try {
-    const response = await axios.get(`http://localhost:5000/api/vehiculos/${category}`);
+    const response = await axios.get(`${API_BASE_URL}/vehiculos/${category}`);
     return response.data;
   } catch (error) {
     console.error('Error al obtener los vehículos:', error);
