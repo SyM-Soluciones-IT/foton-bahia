@@ -19,37 +19,13 @@ const Header = ({ onSectionChange }) => {
   const [showCategories, setShowCategories] = useState(false);
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const [selectedSection, setSelectedSection] = useState("inicio"); // Se inicializa selectedSection con "inicio"
-  const [showModal, setShowModal] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [asunto, setAsunto] = useState("");
   const location = useLocation();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post("http://localhost:5000/api/contacto", {
-        name,
-        email,
-        message,
-        asunto,
-      });
-      alert("Message sent successfully!");
-      setName("");
-      setAsunto("");
-      setEmail("");
-      setMessage("");
-    } catch (error) {
-      console.error("Error sending message:", error);
-      alert("An error occurred while sending the message.");
-    }
-  };
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const categoriesData = await getCategories();
+        categoriesData.sort((a, b) => a.name.localeCompare(b.name));
         setCategories(categoriesData);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -67,8 +43,8 @@ const Header = ({ onSectionChange }) => {
     const pathname = decodeURIComponent(location.pathname);
     if (pathname === "/") {
       setSelectedSection("inicio");
-    } else if (pathname === "/repuestos") {
-      setSelectedSection("repuestos");
+    } else if (pathname === "/post-venta") {
+      setSelectedSection("post-venta");
     } else if (pathname === "/usados") {
       setSelectedSection("usados");
     } else if (pathname === "/contacto") {
@@ -77,7 +53,7 @@ const Header = ({ onSectionChange }) => {
       setSelectedSection("nosotros");
     } else {
       const category = categories.find(
-        (cat) => `/vehiculos/${cat.name}` === pathname
+        (cat) => `/nuestros-vehiculos/${cat.name.toLowerCase()}` === pathname
       );
       if (category) {
         onSectionChange(category.name);
@@ -144,13 +120,7 @@ const Header = ({ onSectionChange }) => {
               <Nav.Link
                 as={Link}
                 to="/"
-                className="nav-link-inicio"
-                style={{
-                  backgroundColor:
-                    selectedSection === "inicio" ? "#ca213b" : "black",
-                  color: "white",
-                  padding: "1px 5px 2px",
-                }}
+                className={(selectedSection === 'inicio') ? 'active' : null}
                 onClick={() => {
                   handleSectionClick("inicio");
                   scrollToTop();
@@ -163,7 +133,6 @@ const Header = ({ onSectionChange }) => {
                 <div
                   className="nav-link dropdown-toggle custom-button vehiculos-dropdown"
                   onClick={handleCategoryClick}
-                  style={{ cursor: "pointer", width: "fit-content", padding: "1px 5px 2px" }}
                 >
                   Nuestros Vehículos
                 </div>
@@ -173,15 +142,8 @@ const Header = ({ onSectionChange }) => {
                       <Nav.Link
                         key={category._id}
                         as={Link}
-                        to={`/vehiculos/${category.name}`}
-                        style={{
-                          backgroundColor:
-                            selectedSection === category.name
-                              ? "#ca213b"
-                              : "black",
-                          color: "white",
-                          padding: "1px 5px 2px",
-                        }}
+                        to={`/nuestros-vehiculos/${category.name.toLowerCase()}`}
+                        className={(selectedSection === category.name) ? 'active' : null}
                         onClick={() => {
                           handleSectionClick(category.name);
                           handleCategoryClick();
@@ -196,7 +158,6 @@ const Header = ({ onSectionChange }) => {
               </div>
               <NavDropdown
                 title="Nuestros Vehículos"
-                id="basic-nav-dropdown"
                 className="d-none d-lg-block vehiculos-dropdown"
                 onClick={handleCategoryClick}
               >
@@ -204,16 +165,8 @@ const Header = ({ onSectionChange }) => {
                   <NavDropdown.Item
                     key={category._id}
                     as={Link}
-                    to={`/vehiculos/${category.name}`}
-                    style={{
-                      backgroundColor:
-                        selectedSection === category.name
-                          ? "#ca213b"
-                          : "black",
-                      color: "white",
-                      padding: "1px 5px 2px",
-                      border: "transparent",
-                    }}
+                    to={`/nuestros-vehiculos/${category.name.toLowerCase()}`}
+                    className={(selectedSection === category.name) ? 'active' : null}
                     onClick={() => {
                       handleSectionClick(category.name);
                       handleCategoryClick();
@@ -226,15 +179,10 @@ const Header = ({ onSectionChange }) => {
               </NavDropdown>
               <Nav.Link
                 as={Link}
-                to="/repuestos"
-                style={{
-                  backgroundColor:
-                    selectedSection === "repuestos" ? "#ca213b" : "black",
-                  color: "white",
-                  padding: "1px 5px 2px",
-                }}
+                to="/post-venta"
+                className={(selectedSection === "post-venta") ? "active" : null}
                 onClick={() => {
-                  handleSectionClick("repuestos");
+                  handleSectionClick("post-venta");
                   scrollToTop();
                   }
                 }
@@ -244,13 +192,7 @@ const Header = ({ onSectionChange }) => {
               <Nav.Link
                 as={Link}
                 to="/usados"
-                className="nav-link-usados"
-                style={{
-                  backgroundColor:
-                    selectedSection === "usados" ? "#ca213b" : "black",
-                  color: "white",
-                  padding: "1px 5px 2px",
-                }}
+                className={(selectedSection === "usados") ? "active" : null}
                 onClick={() => {
                   handleSectionClick("usados");
                   scrollToTop();
@@ -262,12 +204,7 @@ const Header = ({ onSectionChange }) => {
               <Nav.Link
                 as={Link}
                 to="/contacto"
-                style={{
-                  backgroundColor:
-                    selectedSection === "contacto" ? "#ca213b" : "black",
-                  color: "white",
-                  padding: "1px 5px 2px",
-                }}
+                className={selectedSection === "contacto" ? "active" : null}
                 onClick={() => {
                   handleSectionClick("contacto");
                   scrollToTop();
@@ -280,109 +217,18 @@ const Header = ({ onSectionChange }) => {
               <Nav.Link
                 as={Link}
                 to="/nosotros"
-                style={{
-                  backgroundColor:
-                    selectedSection === "nosotros" ? "#ca213b" : "black",
-                  color: "white",
-                  padding: "1px 5px 2px",
-                }}
+                className={(selectedSection === "nosotros") ? "active" : null}
                 onClick={() => {
                   handleSectionClick("nosotros");
                   scrollToTop();
                   }
                 }
               >
-                Nosotros
+                Sobre Nosotros
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
-          
-          {/* <Nav className="d-flex flex-row nav-right">
-            <Nav.Link
-              style={{
-                backgroundColor: "#ca213b",
-                color: "white",
-                padding: "1px 5px 2px",
-                marginRight: "10px",
-              }}
-              onClick={() => handleCotizarClick("contacto")}
-            >
-              Contacto
-            </Nav.Link>
-            <Nav.Link
-              style={{
-                backgroundColor: "#ca213b", // Color verde de WhatsApp
-                color: "white",
-                padding: "1px 5px 2px",
-              }}
-              onClick={() => {
-                const mensaje = encodeURIComponent(
-                  "¡Hola! Estoy interesado en obtener más información."
-                );
-                window.open(`https://wa.me/+5492916446200/?text=${mensaje}`);
-              }}
-            >
-              WhatsApp
-            </Nav.Link>
-          </Nav> */}
         </Navbar>
-        {/* <Modal show={showModal} onHide={handleCloseModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Contacto</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Container>
-              <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formName">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter your name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group controlId="formEmail">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group controlId="formAsunto">
-                  <Form.Label>Asunto</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter the subject"
-                    value={asunto}
-                    onChange={(e) => setAsunto(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group controlId="formMessage">
-                  <Form.Label>Message</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    placeholder="Enter your message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                  />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                  Send
-                </Button>
-              </Form>
-            </Container>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseModal}>
-              Cerrar
-            </Button>
-          </Modal.Footer>
-        </Modal>  */}
-        
       </div>
     </header>
   );

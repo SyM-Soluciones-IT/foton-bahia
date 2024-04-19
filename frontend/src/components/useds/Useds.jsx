@@ -47,10 +47,10 @@ const Useds = ({ onSectionChange, selectedSection }) => {
 
   return (
     <div className="container contenedor d-flex flex-column align-items-center">
-      <h2 className="principal-titulo-usados">{USEDS_TEXT.title}</h2>
+      <h2 className="principal-titulo-seccion">{USEDS_TEXT.title}</h2>
       <div className="separador">
-        <p>{USEDS_TEXT.description}</p>
-        <p>{USEDS_TEXT.description2}</p>
+        <p className="repuestos-texto">{USEDS_TEXT.description}</p>
+        <p className="repuestos-texto">{USEDS_TEXT.description2}</p>
       </div>
       <div className="row d-flex justify-content-center">
         {useds.map((used) => (

@@ -58,9 +58,9 @@
     margin-right: 10% !important;
     align-items: center !important;
     width: 100vw !important;
-    background-color: #ca213b !important;
-    color: white !important;
+    color: #101010 !important;
     justify-items: center !important;
+    margin-bottom: 1em;
   }
   .sub-contenedor-2{
     text-align: center !important;

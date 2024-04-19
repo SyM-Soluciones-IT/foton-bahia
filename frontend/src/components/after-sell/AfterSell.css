@@ -18,7 +18,7 @@
 }
 
 .tarjeta {
-  border: 1px solid black;
+  border: 1px solid #101010;
   width: 80%; /* Cambia el ancho a 100% para que ocupe todo el ancho en pantallas pequeñas */
   background-color: #ca173e;
   color: white;

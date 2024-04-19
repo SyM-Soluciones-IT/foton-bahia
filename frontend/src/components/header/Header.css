@@ -22,9 +22,18 @@ h1{
   padding-right: 3%;
 }
 
+.nav-link{
+  border-radius: 0.5rem;
+}
+
+.nav-item.dropdown .dropdown-toggle {
+  padding-right: var(--bs-navbar-nav-link-padding-x);
+  padding-left: var(--bs-navbar-nav-link-padding-x);
+}
+
 /* Estilos específicos para la barra de navegación móvil */
 .mobile-navbar {
-  background-color: black;
+  background-color: #101010;
   color: white;
   position: sticky;
   padding-left: 3%;
@@ -68,23 +77,33 @@ h1{
 }
 
 .dropdown-menu{
-  background-color: black !important;
+  background-color: #101010 !important;
   color: white !important;
   border: transparent !important;
+  padding: 0 0.5rem;
 }
 .navbar-nav .dropdown-menu{
   position: absolute;
 }
 
-#basic-nav-dropdown{
-  padding: 1px 5px 2px !important;
-  margin-right: 0px !important;
-  height: fit-content !important;
-}
-
 .dropdown-toggle::after {
   font-size: 1.5rem; /* Ajusta el tamaño del icono */
 }
+
+.dropdown-item{
+  color: white;
+}
+
+.active.dropdown-item{
+  background-color: #ca173e;
+  border-radius: 0.5rem;
+}
+
+.nav-link-categorias{
+  border-radius: 0;
+}
+
+
 
 
 @media (min-width: 540px){
@@ -99,10 +118,13 @@ h1{
     height: 56px;
   }
 
-  .nav-link:hover{
+  .nav-link:hover, .nav-link.active{
     color: white !important;
-    background-color: #ed4234 !important;
+    background-color: #ca173e !important;
+    border-radius: 0.5rem;
   }
+
+
   .navbar-nav .dropdown-menu{
     position: static;
   }
@@ -113,10 +135,15 @@ h1{
   
   .dropdown-item:hover{
     color: white !important;
-    background-color: #ed4234 !important;
+    background-color: #ca173e !important;
   }
+
   .nav-link-inicio{
     margin-top: 0;
+  }
+
+  .nav-link-categorias:hover{
+    border-radius: 0;
   }
 
   .mobile-navbar .nav-link {

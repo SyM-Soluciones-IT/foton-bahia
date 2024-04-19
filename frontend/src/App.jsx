@@ -34,10 +34,10 @@ const App = () => {
         />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/vehiculos" element={<Categories />} />
+          <Route exact path="/nuestros-vehiculos" element={<Categories />} />
           <Route
             exact
-            path="/vehiculos/:categoria"
+            path="/nuestros-vehiculos/:categoria"
             element={
               <Vehicles
                 onSectionChange={handleSectionChange}
@@ -45,7 +45,7 @@ const App = () => {
               />
             }
           />
-          <Route exact path="/repuestos" element={<SpareParts />} />
+          <Route exact path="/post-venta" element={<SpareParts />} />
           <Route
             exact
             path="/usados"

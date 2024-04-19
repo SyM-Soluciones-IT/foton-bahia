@@ -21,27 +21,33 @@ const Vehicles = ({ onSectionChange, selectedSection }) => {
     const fetchCategories = async () => {
       try {
         const categoriesData = await getCategories();
+        categoriesData.sort((a, b) => a.name.localeCompare(b.name));
         setCategories(categoriesData);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
     };
     fetchCategories();
-    const pathname = decodeURIComponent(location.pathname);
-    setCategory(pathname.split("/")[2]);
+    const pathname = decodeURIComponent(location.pathname.toLowerCase());
+    const capitalizedCategory = pathname.split("/")[2].replace(/-/g, " ")
+      .split(" ")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
+    setCategory(capitalizedCategory);
   }, [location]);
 
   useEffect(() => {
     const fetchData = async () => {
       if (category) {
         try {
-          setLoading(loading);
+          setLoading(true);
           const vehiclesData = await getVehicles(category);
           setVehicles(vehiclesData);
         } catch (error) {
           console.error("Error fetching vehicles:", error);
         } finally {
-          setLoading(!loading);
+          setLoading(false);
         }
       }
     };
@@ -51,8 +57,13 @@ const Vehicles = ({ onSectionChange, selectedSection }) => {
   }, [category]);
 
   const updateSelectedSection = () => {
-    const categoryName = decodeURIComponent(location.pathname).split("/")[2];
-    onSectionChange(categoryName);
+    const pathname = decodeURIComponent(location.pathname.toLowerCase());
+    const capitalizedCategory = pathname.split("/")[2].replace(/-/g, " ")
+      .split(" ")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
+    onSectionChange(capitalizedCategory);
   };
 
   const handleToggleClick = () => setIsNavExpanded(!isNavExpanded);
@@ -81,16 +92,17 @@ const Vehicles = ({ onSectionChange, selectedSection }) => {
     <div className="container contenedor text-center d-flex flex-column align-items-center">
       <div className="contenedor-titulo-categoria">
         <h2 className="principal-titulo-seccion" style={{ marginBottom: "0" }}>{category}</h2>
+      </div>
+      <div className="contenedor-descripcion-seccion">
         <p className="descripcion-seccion">{categories.find((cat) => cat.name === category)?.description}</p>
       </div>
-      <div className="container-categorias" style={{ backgroundColor: "#5d5d5d", color: "white", width: "100vw" }}>
-        <h3 className="text-center mt-4 mb-3">Conoce todos nuestros vehículos</h3>
-        <Navbar expand="lg" className="nav-dropdown-mobile" style={{ backgroundColor: "#5d5d5d", color: "white", width: "100%", border: "transparent" }} expanded={isNavExpanded} onToggle={handleToggleClick}>
+      <div className="container-categorias" style={{ backgroundColor: "#101010", color: "white", width: "100vw" }}>
+        <Navbar expand="lg" className="nav-dropdown-mobile" style={{backgroundColor: "#101010", color: "white", width: "100%", border: "transparent" }} expanded={isNavExpanded} onToggle={handleToggleClick}>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav" className="nav-categorias">
             <Nav className="mr-auto navbar-categorias">
               {categories.map((cat) => (
-                <Nav.Link key={cat._id} className="nav-link-categorias" as={Link} to={`/vehiculos/${cat.name}`} style={{ backgroundColor: selectedSection === cat.name ? "#ca213b" : "#5d5d5d", color: "white", fontWeight: "bold", fontSize: "1.2em" }} onClick={() => handleSectionClick(cat.name)}>{cat.name}</Nav.Link>
+                <Nav.Link key={cat._id} className="nav-link-categorias" as={Link} to={`/nuestros-vehiculos/${cat.name.toLowerCase().replace(/\s+/g, '-')}`} style={{ backgroundColor: selectedSection === cat.name ? "#ca213b" : "#101010", color: "white", fontWeight: "bold", fontSize: "1.2em", borderRadius: "0.5rem" }} onClick={() => handleSectionClick(cat.name)}>{cat.name}</Nav.Link>
               ))}
             </Nav>
           </Navbar.Collapse>
@@ -108,29 +120,29 @@ const Vehicles = ({ onSectionChange, selectedSection }) => {
           {currentVehicles.map((vehicle) => (
             <div key={vehicle._id} className="col-md-4 mb-4" style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
               <div className="card-productos" style={{ marginTop: "10px", width: "300px" }}>
-                <Carousel style={{ borderBottom: "1px solid black" }} interval={null} controls={vehicle.image.length > 1 || vehicle.video.length > 0}>
+                <Carousel style={{ borderBottom: "1px solid #101010", height: "250px"}} interval={null} controls={vehicle.image.length > 1 || vehicle.video.length > 0}>
                   {vehicle.image.map((image, index) => (
-                    <Carousel.Item key={index}>
-                      <img className="d-block w-100 image-card" height="290" style={{ borderTopLeftRadius: "5px", borderTopRightRadius: "5px" }} src={image} alt={`Slide ${index}`} />
+                    <Carousel.Item className="img-auto" key={index}>
+                      <img className="d-block w-100 image-card img-fluid" loading="lazy" style={{ borderTopLeftRadius: "5px", borderTopRightRadius: "5px" }} src={image} alt={`Slide ${index}`} />
                     </Carousel.Item>
                   ))}
                   {vehicle.video.length > 0 && vehicle.video.map((video, index) => (
-                    <Carousel.Item key={index}>
-                      <iframe width="100%" height="290" src={video} title={`Video ${index}`} allowFullScreen border="transparent" style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }} />
+                    <Carousel.Item className="img-auto" key={index}>
+                      <iframe className="img-auto" loading="lazy" src={video} title={`Video ${index}`} allowFullScreen border="transparent" style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }} />
                     </Carousel.Item>
                   ))}
                 </Carousel>
                 <div className="card-body-productos">
-                  <h5 className="card-title" style={{ width: "100%", fontWeight: "bold", borderBottom: "1px solid black" }}>{vehicle.name}</h5>
+                  <h5 className="card-title" style={{ width: "100%", fontWeight: "bold", borderBottom: "1px solid #101010" }}>{vehicle.name}</h5>
                   {["engine", "power", "gearbox", "load"].map((field) => (
                     <p key={field} className="card-text" style={{ textAlign: "center" }}>
                       <strong>{field === "engine" ? "Motor" : field === "power" ? "Potencia" : field === "gearbox" ? "Transmisión" : "PBT"}:</strong> {vehicle[field]}
                     </p>
                   ))}
                   {vehicle.datasheet && vehicle.datasheet !== "" && (
-                    <a href={vehicle.datasheet} target="_self" rel="noopener noreferrer" className="btn btn-primary">Descargar ficha técnica</a>
+                    <a href={vehicle.datasheet} target="_self" rel="noopener noreferrer" className="btn btn-primary">Descargar Ficha Técnica</a>
                   )}
-                  <button className="btn btn-primary" style={{ width: "fit-content" }} onClick={() => handleCotizarClick(vehicle)}>Cotiza aquí</button>
+                  <button className="btn btn-primary" style={{ width: "fit-content" }} onClick={() => handleCotizarClick(vehicle)}>Cotiza Aquí</button>
                 </div>
               </div>
             </div>
